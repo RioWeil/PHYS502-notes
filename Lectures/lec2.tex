@@ -1,0 +1,195 @@
+\section{Second Quantization}
+\subsection{Motivation}
+The goal is to re-state the familiar Schrodinger equation:
+\begin{equation}\label{eq-se}
+    i\hbar\dpd{}{t}\psi(\v{x}_1, \ldots, \v{x}_N, t) = H\psi(\v{x}_1, \ldots, \v{x}_N, t).
+\end{equation}
+in a more convenient format for $N \sim 10^{23}$. Second quantization is a bit of a misnomer; we will not quantize any further, but we will just recast the SE into a more convenient basis. Here we will give a summary of the derivation, and the gory mathematical details left to self-study; refer to the Chapter 1 handout of Fetter and Walecka.
+
+We will consider the following Hamiltonian as an example:
+\begin{equation}
+    H = \sum_{k=1}^N T(\v{x}_k) + \frac{1}{2}\sum_{k < l}^N V(\v{x}_k, \v{x}_l)
+\end{equation}
+where we have the single-particle operator $T$ (kinetic energy) and the two-particle operator $V$ (interaction; e.g. Coulomb).
+
+\subsection{The Central Idea}
+The problem is that the number of variables that this wavefunction depends on is absolutely astronomical. The key will be that any two electrons are \emph{fundamentally indistinguishable}; instead of keeping track of $N \sim 10^{23}$ positions, it is sufficient to specify how many particles occupy a given single-particle state. To this end we choose a basis of single particle states $\psi_{E_k}(\v{x}_k)$ where $E_k$ represents a complete set of single-particle quantum numbers\footnote{$E_k$ does \emph{not} represent energy} (e.g. momentum $\v{p}$ for spinless bosons in a 3d box, or $n, l, m, s_z$ for an electron in a hydrogen atom). We then write the many-body wavefunction in this basis as:
+\begin{equation}
+    \psi(\v{x}_1, \ldots, \v{x}_N, t) = \sum_{E_1, \ldots, E_N}C(E_1, \ldots, E_N, t)\psi_{E_1}(\v{x}_1)\ldots \psi_{E_N}(\v{x}_N)
+\end{equation}
+We must distinguish two possible cases for these particles; namely they can either be bosons or fermions i.e. take care of the ``exchange statistics''. This is encoded in the many body wavefunction as a property of how the wavefunction behaves under exchange of any two particles:
+\begin{equation}
+    \psi(\ldots, \v{x}_i, \ldots, \v{x}_j, \ldots, t) = \pm \psi(\ldots, \v{x}_j, \ldots, \v{x}_i, \ldots, t)
+\end{equation}
+with $+$ corresponding to bosons and $-$ corresponding to fermions. This has far-reaching consequences for the nature of many-body states. If this wavefunction rule is obeyed, the coefficients must obey the same rule:
+\begin{equation}
+    C(\ldots, E_i, \ldots, E_j, \ldots, t = \pm C(\ldots, E_j, \ldots, E_i, \ldots, t).
+\end{equation}
+Bosons are a bit easier, so we discuss them first.
+
+\subsection{The Boson Case}
+For the sake of simplicity, we will imagine that the $E_j$s are represented by integers, namely $E_j \in \NN$. Suppose we have coefficient $C(12134115\ldots, t)$. Since we are free to exchange any of the integers as we like, we may arrange it as:
+\begin{align*}
+    C(12134115\ldots, t) = C(1111\ldots 2222\ldots 333\ldots \ldots, t)
+\end{align*}
+where we have $n_1$ $1$s, $n_2$ $2$s, $n_3$ $3$s and so on. 
+It should be immediately clear that it is not necessary to keep track of all $10^{23}$ numbers, but just the number of particles in each state (each number). We then define:
+\begin{equation}
+    C(1111\ldots 2222\ldots 333\ldots \ldots, t) \equiv \bar{C}(n_1, n_2, \ldots, n_\infty, t).
+\end{equation}
+In analogy, when we think about our bank account, we do not care about the individual dollars or what they look like; we only care about the total number of dollars in each of our accounts. We can then write the wavefunction in terms of $\bar{C}$, and then massage the resulting expressions to obtain convenient equations (as is done in the text).
+
+\subsection{Many-Body Hilbert Space, Creation/Annhilation Operators}
+We introduce a many-body Hilbert space and creation/annhilation operators that act on states in the space. States in the space look like. These states are orthonormal and complete:
+\begin{equation}
+    \begin{split}
+        &\braket{n_1'n_2'\ldots n_\infty'}{n_1n_2\ldots n_\infty} = \prod_{i=1}^\infty \delta_{n_i, n_i'}
+        \\ &\sum_{n_1, n_2, \ldots, n_\infty} \ket{n_1n_2\ldots n_\infty}\bra{n_1n_2\ldots n_\infty} = 1.
+    \end{split}
+\end{equation}
+We then define the creation/annhilation operators by defining their commutation relations. For bosons, we have:
+\begin{equation}
+    \begin{split}
+        [b_k, b_{k'}^\dagger] &= \delta_{kk'}
+        \\ [b_k, b_{k'}] &= 0
+        \\ [b_k^\dagger, b_{k'}^\dagger] &= 0
+    \end{split}
+\end{equation}
+where $b_k^\dagger$ is said to create a boson in state $\psi_{E_k}(\v{x})$. We record the notation:
+\begin{equation}
+    \ket{n_1n_2\ldots n_\infty} = \ket{n_1}\otimes\ket{n_2}\otimes\ldots\otimes\ket{n_\infty}.
+\end{equation}
+
+We can now use the commutation relations to count the number of particles, as well as create and annhilate them:
+\begin{equation}
+    \begin{split}
+        b_k^\dagger b_k \ket{n_k} &= n_k\ket{n_k}
+        \\ b_k\ket{n_k} &= \sqrt{n_k}\ket{n_k - 1}
+        \\ b_k^\dagger \ket{n_k} &= \sqrt{n_k + 1}\ket{n_k + 1}.
+    \end{split}
+\end{equation}
+and if there is no boson to destroy (i.e. we have the vacuum state $\ket{0}$), we have the special case of:
+\begin{align*}
+    b_k\ket{0} = 0.
+\end{align*}
+Most of the states of interest in CM physics is low-temperature states where there are limited number of states with large occupancies. E.g. Bose-Einstein condensation, where all particles go into the single-particle ground state ($n_1$ is huge, $n_i$ for $i > 1$ are zero). When you heat up this condensate a little, $n_1$ will still be large, and the excited states will start to be occupied.
+
+\subsection{Second Quantization Result}
+With these definitions, one can show (see F\&W) that Eq. \eqref{eq-se} becomes:
+\begin{equation}
+    \begin{split}
+        &i\hbar \dpd{}{t}\ket{\psi(t)} = H\ket{\psi(t)}
+        \\ &\boxed{H = \sum_{i, k}\bra{i}T\ket{j}b_i^\dag b_j + \frac{1}{2}\sum_{ijkl} \bra{ij}V\ket{kl}b_i^\dag b_j^\dag b_l b_k}.
+    \end{split}
+\end{equation}
+Note the order of $b_lb_k$ above. This does not matter for bosons (as the two are seen to commute via the commutation relations), but it will matter for fermions, as we will soon see. As a reminder, $\ket{\psi(t)}$ lives in the many-body Hilbert space:
+\begin{align*}
+    \ket{\psi(t)} = \sum_{n_1n_2\ldots n_\infty}f(n_1, n_2, \ldots, n_\infty, t)\ket{n_1n_2\ldots n_\infty}.
+\end{align*}
+In second quantization, the important quantities of interest to calculate will be the matrix elements of $T$ and $V$ with respect to the chosen multi-particle basis.
+
+\subsection{The Fermion Case}
+For fermions, the anti-symmetry under exchange implies the Pauli exclusion principle; that is, at most one fermion can occupy a given state. To see this in terms of the coefficients $C$, we have the relation:
+\begin{equation}
+    C(11\ldots) = -C(11\ldots)
+\end{equation}
+where we have interchanged the $1$s. The only way this can be satisfied is if $C(11\ldots) = 0$. So for the coefficient to be nonzero, all of the fermions must be in different states. In second quantization, this is implemented by the anti-commutation relations of creation and destruction operators:
+\begin{equation}
+    \begin{split}
+        \{c_s, c_{s'}^\dagger\} &= \delta_{kk'}
+        \\ \{c_s, c_{s'}\} &= 0
+        \\ \{c_s^\dagger, c_{s'}^\dagger\} &= 0
+    \end{split}
+\end{equation}
+Where $\{A, B\} = AB + BA$ is the anticommutator. We can derive the following properties:
+\begin{enumerate}
+    \item $\{c_s^\dag, c_s^\dag\} = 2c_s^\dag c_s^\dag = 0$, so:
+    \begin{equation}
+        c_s^{\dag 2} = 0 \implies c_s^{\dag 2}\ket{0} = 0
+    \end{equation}
+    this is a restatement of the Pauli principle. We cannot create two fermions in the same state. Analogously, $c_s^2 = 0$.
+    \item We have the number operator (as in the boson case) of $\hat{n} = c^\dag c$. We then have that:
+    \begin{equation}
+        (\hat{n})^2 = (c^\dag c)^2 = c^\dag c c^\dag c = c^\dag (1 - c^\dag c)c = c^\dag c = \hat{n}
+    \end{equation}
+    where in the second-to-last equality we use the anticommutation relation and for the last equality we use that $c^{\dag 2} = 0$. So, the number operator has the property of idempotency. From this we can conclude that $\hat{n}$ has eigenvalues of $0$ and $1$ (as these are the only values that square to 1). This again is consistent with the Pauli exclusion principle; either we have zero or one fermions in a given quantum state.
+    \item It is easy to deduce:
+    \begin{equation}
+        \begin{split}
+            &c^\dag\ket{0} = \ket{1} \quad c\ket{1} = \ket{0}
+            \\ &c^\dag\ket{1} = c^\dag c^\dag \ket{0} = 0
+            \\ &c\ket{1} = c c\ket{0} = 0
+        \end{split}
+    \end{equation}
+\end{enumerate}
+
+A note with bookkeeping; because of the anti-commutation rules, it becomes necessary to track signs in many-body states. We have the following many-particle state which we apply $c_s$ to:
+\begin{equation}
+    \begin{split}
+        &\ket{n_1n_2 \ldots n_\infty} = (c_1^\dag)^{n_1}(c_2^\dag)^{n_2} \ldots (c_\infty^\dag)^{n_\infty}\ket{0}.
+        \\  &c_s\ket{n_1n_2\ldots n_\infty} = (-1)^{s_s}(c_1^\dag)^{n_1}(c_2^\dag)^{n_2} \ldots (c_sc_s^\dag)\ldots (c_\infty^\dag)^{n_\infty}\ket{0}
+    \end{split}
+\end{equation}
+where $s_s = \sum_{i=1}^{s-1} n_i$; the sign has been accumulated by pushing the $c_s$ through. This implies the following rules for many-body fermion states:
+\begin{equation}
+    \begin{split}
+        &c_s\ket{\ldots n_s \ldots} = \begin{cases}
+            (-1)^{s_s}\sqrt{n_s}\ket{\ldots n_{s} - 1 \ldots} & \text{if $n_s = 1$}
+            \\ 0 & \text{if $n_s = 0$}
+        \end{cases}
+        \\ &c_s^\dag\ket{\ldots n_s \ldots} = \begin{cases}
+            (-1)^{s_s}\sqrt{n_s+1}\ket{\ldots n_{s} + 1 \ldots} & \text{if $n_s = 0$}
+            \\ 0 & \text{if $n_s = 1$}
+        \end{cases}
+        \\ &c_s^\dag c_s\ket{\ldots n_s \ldots} = n_s\ket{\ldots n_s \ldots}.
+    \end{split}
+\end{equation}
+Note however the quantities in square roots are always one, so we can just forget about them.
+
+Similar to bosons, we can rewrite Eq. \eqref{eq-se} as:
+\begin{equation}
+    \begin{split}
+        &i\hbar\dpd{}{t}\ket{\psi(t)} = H\ket{\psi(t)}
+        \\ &H = \sum_{rs}\bra{r}T\ket{s} c_r^\dag c_s + \frac{1}{2}\sum_{rstn}\bra{rs}V\ket{tu} c_r^\dag c_s^\dag c_u c_t.
+    \end{split}
+\end{equation}
+where we again note the order of the annhilation operators.
+
+\subsection{Field Operators}
+It is often convenient to create a particle at a point $\v{x}$ To this end, we define field operators:
+\begin{equation}
+    \hat{\psi}(\v{x}) = \sum_k \psi_k(\v{x})c_k, \quad \hat{\psi}^\dag(\v{x}) = \sum_k \psi_k^\dag(\v{x})c_k^\dag
+\end{equation}
+These can be viewed as a kind of Fourier transform, or more generally as a change of basis. As an example, consider spin-1/2 fermions. We can label them by the momentum $\v{k}$ and the spin $s_z$. The index $k$ can be thought as $k = (\v{k}, s_z)$. Then, $\psi_k(\v{x})$ can be thought of as two-component spinors, where:
+\begin{equation}
+    \psi_k(\v{x}) = \m{\psi_\v{k}(\v{x})_1 \\ \psi_\v{k}(\v{x})_2}
+\end{equation}
+which can be thought of the wavefunctions for the spin up and down projections. We can easily deduce commutation (and anti-commutation) relations for the field operators:
+\begin{equation}
+    \begin{split}
+        &[\hat{\psi}_\alpha(\v{x}), \hat{\psi}_\beta^\dag(\v{x}')]_\pm = \sum_k \psi_k(\v{x})_\alpha \psi_k(\v{x}')_\beta^* = \delta_{\alpha\beta}\delta(\v{x} - \v{x}').
+        \\ &[\hat{\psi}_\alpha(\v{x}), \hat{\psi}_\beta(\v{x}')]_\pm = [\hat{\psi}^\dag_\alpha(\v{x}), \hat{\psi}^\dag_\beta(\v{x}')]_\pm = 0
+    \end{split}
+\end{equation}
+Similarly, the Hamiltonian can be written as:
+\begin{equation}
+    H = \int d^3x \hat{\psi}^\dag(\v{x})T(\v{x})\hat{\psi}(\v{x}) + \frac{1}{2}\int d^3xd^3y \hat{\psi}^\dag(\v{x})\hat{\psi}^\dag(\v{y}) V(\v{x}, \v{y})\hat{\psi}(\v{y})\hat{\psi}(\v{x}).
+\end{equation}
+and we invite the reader to check that this is indeed the case. Note that in general there should always be the same number of creation and annhilation operators; except towards the end of the course when we will look at superconducting systems, where there will be more creation than annhilation (and we will think about how to understand this). There are other operators that can be discussed in the same way. 
+\begin{enumerate}
+    \item The current operator. The form of the operator in first and second quantization is given below:
+    \begin{equation}
+        \begin{split}
+            J(\v{x}) &= \sum_{i=1}^N J(\v{x}_i)
+            \\ \hat{J} &= \sum_{rs}\bra{r}J\ket{s}c_r^\dag c_s = \int d^3x \sum_{rs} \psi_r^\dag(\v{x}) J(\v{x})\psi_s(\v{x})c_r^\dag c_s = \int d^3 x \hat{\psi}^\dag(\v{x})J(\v{x})\hat{\psi}(\v{x})
+        \end{split}
+    \end{equation}
+    We see why the second quantization notation is so useful/economical; we simply take the first-quantized operator, sandwhich it between field operators, and integrate.
+    \item The number operator. This follows much of the same logic as the current operator above. The first expression gives the number density, and the second the total particle number (which is obtained by integrating the number density over all space).
+    \begin{equation}
+        \begin{split}
+            \hat{n}(\v{x}) &= \sum_{r, s} \psi_r^\dag(\v{x})\psi_s(\v{x})c_r^\dag c_s = \hat{\psi}^\dag(\v{x})\hat{\psi}(\v{x})
+            \\ \hat{N} &= \int d^3x \hat{n}(\v{x}) = \int d^3x\hat{\psi}^\dag(\v{x})\hat{\psi}(\v{x}).
+        \end{split}
+    \end{equation}
+\end{enumerate}
