@@ -1,0 +1,29 @@
+\documentclass[10pt]{standalone}
+\usepackage{commands}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines = center,
+        xlabel = \(k\),
+        ylabel = {\(\e(k)/\e_F\)},
+        legend style={at={(0.7,0.02)},anchor=south west}
+    ]
+    \addplot [
+        domain=0:2, 
+        samples=100, 
+        color=red,
+    ]
+    {x^2};
+    \addlegendentry{$\e_0(\v{k})$}
+
+    \addplot [
+        domain=0.01:2, 
+        samples=100, 
+        color=blue,
+    ]
+    {x^2 - 2*(0.5 + (1-x^2)/(4*x)*ln(abs((1+x)/(1-x))))};
+    \addlegendentry{$\e^{MF}(\v{k})$}
+    \end{axis}
+\end{tikzpicture}
+\end{document}

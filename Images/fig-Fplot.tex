@@ -1,0 +1,19 @@
+\documentclass[10pt]{standalone}
+\usepackage{commands}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines = center,
+        xlabel = \(x\),
+        ylabel = {\(F(x)\)},
+    ]
+    \addplot [
+        domain=0.01:2.5, 
+        samples=100, 
+        color=red,
+    ]
+    {0.5 + (1-x^2)/(4*x)*ln(abs((1+x)/(1-x)))};
+    \end{axis}
+\end{tikzpicture}
+\end{document}
