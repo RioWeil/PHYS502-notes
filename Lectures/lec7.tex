@@ -115,14 +115,166 @@ and retain only terms containing at least only one power of $N_0$. This is a bit
 \begin{equation}
     H \approx \sum_{\v{k}}\e_{\v{k}}a^\dag_\v{k}a_\v{k} + \frac{1}{2}N_0^2 V_0 + N_0V_0\sum_{\v{k}}' a_\v{k}^\dag a_\v{k} + N_0\sum_\v{q}'V_\v{q}a^\dag_{\v{q}}a_\v{q} + \frac{1}{2}N_0\sum_\v{q}' V_\v{q}(a_\v{q}a_{-\v{q}} + a_\v{q}^\dag a_{-\v{q}}^\dag)
 \end{equation}
-The first (kinetic energy) term remains unchanged. The second term comes from $\v{k} = v{q} = \v{p} = \v{0}$, The third term comes from $\v{p} = \v{q} = \v{0}$ or $\v{k} = \v{q} = \v{0}$ and so on. To simplify, we define $\eta_\v{k} = N_0V_\v{k}$ and $\hbar \Omega_\v{k} = \e_\v{k} + \eta_\v{k}$. Notice also that $N_0 + \sum_\v{k}' a^\dag_\v{k}a_\v{k} \approx N$. where $N_0, N \gg N' = \sum_\v{k}' a^\dag_\v{k}a_\v{k}$. With this, let us combine some terms:
-\begin{align*}
-    \frac{1}{2}N^2V_0 = \frac{1}{2}V_0\left[N_0^2 + 2N_0\sum_\v{k}' a^\dag_\v{k}a_\v{k} + \ldots \right]
-\end{align*}
-Hence we can write the entire Hamiltonian as:
+The first (kinetic energy) term remains unchanged. The second term comes from $\v{k} = v{q} = \v{p} = \v{0}$, The third term comes from $\v{p} = \v{q} = \v{0}$ or $\v{k} = \v{q} = \v{0}$ and so on. To simplify, we define:
 \begin{equation}
+    \begin{split}
+        \eta_\v{k} &= N_0V_\v{k}
+        \\ \hbar \Omega_\v{k} &= \e_\v{k} + \eta_\v{k}.
+    \end{split}
+\end{equation}
+Notice also that $N_0 + \sum_\v{k}' a^\dag_\v{k}a_\v{k} \approx N$. where $N_0, N \gg N' = \sum_\v{k}' a^\dag_\v{k}a_\v{k}$. With this, let us combine some terms:
+\begin{equation}
+    \frac{1}{2}N^2V_0 = \frac{1}{2}V_0\left[N_0^2 + 2N_0\sum_\v{k}' a^\dag_\v{k}a_\v{k} + \ldots \right]
+\end{equation}
+Hence we can write the entire Hamiltonian as:
+\begin{equation}\label{eq-He4aHamiltonian}
     H \approx \frac{1}{2}N^2 V_0 + \sum_{\v{k}}\left[\hbar \Omega_\v{k}a^\dag_\v{k}a_\v{k} + \frac{1}{2}\eta_\v{k}(a_\v{k}a_{-\v{k}} + a^\dag_\v{k}a^\dag_{-\v{k}})\right]
 \end{equation}
 We draw our attention to the last term(s); these are ``anomalous terms'', which \emph{do not} conserve particle number. This is a consequence of the Bogoliubov approximation. Physically, $a_\v{k}a_{-\v{k}}$ represent bosons $(\v{k}, -\v{k})$ ``disappearing'' into the condensate. The number of bosons in the condensate is so large that you do not have to keep track of the bosons in the condensate itself; we only need to keep track of the other particles as they disappear and appear out of it.
 
-Bogoliubov also developed a theory of how to treat such Hamiltonians. They can be diagonalized by means of Bogoliubov transformations. We go through what these are next day. We also go through Landau's argument for superfluidity.
+\subsection{Bogoliubov Transformations and Quasiparticle Spectrum}
+Bogoliubov also developed a theory of how to treat such Hamiltonians. They can be diagonalized by means of Bogoliubov transformations:
+\begin{equation}
+    \begin{split}
+        a_\v{k} &= \mu_\v{k}\alpha_\v{k} + \nu_\v{k}\alpha^\dag_{-\v{k}} \vert \alpha_\v{k} = \mu_{\v{k}}a_\v{k} - \nu_\v{k}a^\dag_{-\v{k}}
+        \\ a_\v{k}^\dag &= \mu_\v{k}\alpha_\v{k}^\dag + \nu_\v{k}\alpha_{-\v{k}} \vert \alpha_\v{k}^\dag = \mu_{\v{k}}a^\dag_\v{k} - \nu_\v{k}a_{-\v{k}}
+    \end{split}
+\end{equation}
+where we have the forwards transformations on the left and the inverse transformation on the right. Here, $\alpha_\v{k}$ are our new bosonic ``quasiparticle'' operators and $(\mu_\v{k}, \nu_\v{k})$ are real coefficients. We want this to be a canonical transformation, so we want these new $\alpha$ operators to satisfy the same commutation relations as the $a$s. This is important as it will place constraints on the $\mu_\v{k}$ and $\nu_{\v{k}}$. Let's see what happens:
+\begin{equation}
+    \begin{split}
+        [\alpha_\v{k}, \alpha^\dag_{\v{k}'}] &= [\mu_{\v{k}}a_\v{k} - \nu_\v{k}a^\dag_{-\v{k}}, \mu_{\v{k}'}a^\dag_{\v{k}'} - \nu_{\v{k}'}a_{-\v{k}'}]
+    \\ &= \mu_{\v{k}}\mu_{\v{k}'}[a_\v{k}, a^\dag_{\v{k}'}] + \nu_{\v{k}}\nu_{\v{k}'}[a^\dag_{-\v{k}}, a_{-\v{k}'}]
+    \\ &= (\mu_{\v{k}}^2 - \nu_{\v{k}}^2)\delta_{\v{k}\v{k}'}
+    \end{split}
+\end{equation}
+where we have used the known commutation relations for the $a$s. So we obtain the constraint:
+\begin{equation}
+    [\alpha_\v{k}, \alpha^\dag_{\v{k}'}] = \mu_{\v{k}}^2 - \nu_{\v{k}}^2 = 1.
+\end{equation}
+
+A comment: we want to find $(\mu_\v{k}, \nu_\v{k})$ such that the resulting $H$ is diagonal, that is:
+\begin{equation}
+    H = \sum_{\v{k}}\hbar \omega_\v{k}\alpha^\dag_{\v{k}}\alpha_\v{k} + E_0.
+\end{equation}
+So to this end we compute:
+\begin{equation}
+    \begin{split}
+        \alpha^\dag_{\v{k}}\alpha_\v{k} &= (\mu_{\v{k}}a^\dag_\v{k} - \nu_\v{k}a_{-\v{k}})(\mu_{\v{k}}a_\v{k} - \nu_\v{k}a^\dag_{-\v{k}})
+        \\ &= \mu_\v{k}^2a^\dag_\v{k}a_\v{k} + v_k^2a_{-\v{k}}a^\dag_{-\v{k}} - \mu_\v{k}\nu_{\v{k}}(a_\v{k}a_{-\v{k}} + a^\dag_{\v{k}}a^\dag_{-\v{k}})
+    \end{split}
+\end{equation}
+Comparing this with the form of the Hamiltonian, we can see we are on the right track. The only terms to seem to not appear there are the $a_{-\v{k}}a^\dag_{-\v{k}}$s but we recognize the sum to run over all $\v{k}$ and so we can make a substitution there. We make an assumption that $\omega_\v{k} = \omega_{-\v{k}}$ and $\nu_{\v{k}}^2 = \nu_{-\v{k}}^2$ (we can check later that this is consistent) then:
+\begin{equation}
+    \sum_{\v{k}}\hbar \omega_{\v{k}}\alpha^\dag_{\v{k}}\alpha_{\v{k}} =  \sum_{\v{k}}\hbar \omega_{\v{k}}(\mu_{\v{k}}^2 + \nu_{\v{k}}^2)a^\dag_\v{k}a_\v{k} + \sum_{\v{k}}\hbar \omega_\v{k}\nu_{\v{k}}^2 - \sum_{\v{k}}\hbar \omega_{\v{k}}\mu_{\v{k}}\nu_{\v{k}}(a_\v{k}a_{-\v{k}} + a^\dag_{\v{k}}a^\dag_{-\v{k}})
+\end{equation}
+Comparison with the original Hamiltonian (Eq. \eqref{eq-He4aHamiltonian}) implies:
+\begin{equation}
+    \begin{split}
+        \hbar \omega_\v{k}(\mu_{\v{k}}^2 + \nu_\v{k}^2) &= \hbar \Omega_{\v{k}}
+    \\ 2\hbar \omega_{\v{k}}\mu_{\v{k}}\nu_{\v{k}} &= \eta_{\v{k}}
+    \end{split}
+\end{equation}
+To solve for $\omega_{\v{k}}$ we square both equations and subtract:
+\begin{align*}
+    (\hbar \omega_{\v{k}})^2\left[(\mu_{\v{k}}^2 + \nu_{\v{k}}^2)^2 - 4\mu_{\v{k}}^2\nu_{\v{k}}^2\right] = (\hbar\Omega_{\v{k}})^2 - \eta_{\v{k}}^2
+\end{align*}
+but on the RHS We have $(\mu_{\v{k}} - \nu_{\v{k}})^2 = 1$ and so the dependence on $\mu/\nu$ drops out and we have:
+\begin{equation}
+    \hbar\omega_{\v{k}} = \sqrt{\hbar^2\Omega_{\v{k}}^2 - \eta_\v{k}^2} = \sqrt{\e_{\v{k}}(\eta_\v{k} + 2NV_\v{k})}
+\end{equation}
+which is one of the main results of Bogoliubov theory, the ``spectrum of quasiparticle excitations''. This spectrum will have interesting implications; among other things, it will be the basis for superfluidity in liquid He-4 according to the Landau argument. Let us discuss some special cases of this spectrum. 
+
+\subsection{Quasiparticle Spectrum - Special Cases}
+\subsubsection{Non-Interacting}
+If the bosons are noninteracting, then $V_{\v{k}} = 0$ and so:
+\begin{align*}
+    \hbar\omega_{\v{k}} = \sqrt{\e_{\v{k}}^2} = \frac{\hbar^2\v{k}^2}{2m}
+\end{align*}
+so we indeed reproduce our prior result for free bosons.
+
+\subsubsection{Contact Repulsion}
+We take $V(\v{r}) = U\delta(\v{r})$ (i.e. the bosons repel when they are on top of each other). Since the FT of a dirac delta is just a constant, we have:
+\begin{align*}
+    V_{\v{k}} = \frac{U}{\Omega}
+\end{align*}
+for all $\v{k}$. We then have:
+\begin{equation}
+    \hbar\omega_\v{k} = \sqrt{\e_\v{k}(\e_\v{k} + 2(NU/\Omega))} = \begin{cases}
+        \sqrt{\e_\v{k}E_0} \sim \abs{\v{k}}, \quad \e_{\v{k}} \ll E_0 \text{ (long wavelength = sound-like dispersion)}
+        \\ \abs{\e_\v{k}} \sim \v{k}^2, \quad \e_{\v{k}} \gg E_0 \text{ (short wavelength = particle-like dispersion)}
+    \end{cases}
+\end{equation}
+where we define $2(NU/\Omega) = E_0$. So the weak interactions of Helium modify the dispersion from particle like to sound-like at long wavelengths with linear dispersion relation.
+
+\subsubsection{Typical Helium-4 Interaction}
+The Fermi velocity scales as:
+\begin{figure}[htbp]
+    \centering
+    \textcolor{blue}{$v_k$ vs. $\v{k}$.}
+    \caption{<caption>}
+    \label{<label>}
+\end{figure}
+From this we obtain a dispersion relation that looks as follows:
+\begin{figure}[htbp]
+    \centering
+    \textcolor{blue}{dispersion relation}
+    \caption{<caption>}
+    \label{<label>}
+\end{figure}
+
+This concludes the Bogoliubov theory of Helium-4 in a nutshell. In the next assignment we will explicitly calculate the coefficients in the Bogoliubov transformation and other fun exercises.
+
+\subsection{Landau Argument for Superfluidity}
+To conclude, we cover Landau's argument for superfluidity for Liquid Helium 4. At the time, it was a known experimental fact that liquid Helium-4 would flow in a tube without friction. Experiments were also done where one would start spinning a bucket of Helium-4 at temperature above $T_c$, then the friction would cause it to rotate; then if one cooled the bucket down, the Helium would continue to rotate indefinitely.
+
+Landau considered the following scenario. He considered a vessel of liquid Helium-4 and an object of large mass $M \gg m$ moving with velocity $\v{v}$. The question Landau asked was can the object relax its energy and momentum by emitting quasiparticle excitations? 
+
+\begin{figure}[htbp]
+    \centering
+    \textcolor{blue}{TODO- cartoon figure}
+    \caption{<caption>}
+    \label{<label>}
+\end{figure}
+
+We will show that it is impossible to conserve both energy and momentum and for the particle to relax so long as the object does not exceed a critical velocity $v_c$. Energy conservation and momentum conservation tell us that:
+\begin{equation}
+    \begin{split}
+        \frac{1}{2}M\v{v}^2 &= \frac{1}{2}M\v{v}'^2 + \hbar \omega_{\v{k}}
+        \\ M\v{v} &= M\v{v}' + \hbar\v{k}
+    \end{split}
+\end{equation}
+These are the two equations we must satisfy if this process is allowed.
+Squaring the second equation, we have:
+\begin{align*}
+    M^2\v{v}'^2 = M^2\v{v}^2 + \hbar^2\v{k}^2 - 2M\hbar \v{k} \cdot \v{v}
+\end{align*}
+We can divide out by $2M$ and combine the two conservation equations to find:
+\begin{equation}
+    \hbar \v{v} \cdot \v{k} = \frac{\hbar^2\v{k}^2}{2M} + \hbar \omega_\v{k}
+\end{equation}
+We consider $M \gg m$. and so we can neglect the $ \frac{\hbar^2\v{k}^2}{2m}$ term. Further we can let $\v{v} \cdot \v{k} = \abs{\v{v}}\abs{\v{k}}\cos\theta$ and so:
+\begin{equation}
+    \hbar \abs{\v{v}}\abs{\v{k}}\cos\theta = \hbar \omega_\v{k}
+\end{equation}
+For low enough velocities, the LHS will always be less than the RHS.
+
+\begin{figure}[htbp]
+    \centering
+    \textcolor{blue}{TODO- roton curve with bound}
+    \caption{<caption>}
+    \label{<label>}
+\end{figure}
+
+The graphical solution shows that slow moving objects cannot dissipate energy and momentum in liquid Helium-4. We therefore have dissipationless motion, or superflow.
+
+Note that one can solve for a critical velocity:
+
+\begin{equation}
+    v_c = \min_\v{k}\left(\frac{\omega_\v{k}}{\abs{\v{k}}}\right) \approx 1\si{cm.s^{-1}} \text{ in Helium-4}
+\end{equation}
+
+Note that the actual critical velocity is 10 times slower, due to neglected effects such as the creation of vortex rings etc. but nevertheless Landau's argument is an argument that provides some nice explanatory power!
+
+Question: Why does argument not predict superfluid flow in general life situations? This is left as an exercise for the reader\dots
+
