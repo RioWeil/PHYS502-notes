@@ -1,0 +1,14 @@
+\documentclass[10pt]{standalone}
+\usepackage{commands}
+
+\begin{document}
+\begin{tikzpicture}
+    \draw[thick, -latex] (0, 0) -- (3, 0);
+    \draw[thick, -latex] (0, 0) -- (0, 3);
+    \node[left] at (0, 3) {$v_\v{k}$};
+    \node[below] at (3, 0) {$\abs{\v{k}}$};
+    \draw [thick, blue,-latex] plot [smooth, tension=0.6] coordinates { (0,2.5) (0.3, 2.3) (1.25, 1) (2.7,0.1)};
+    \draw[dashed] (1, 0) -- (1, 1.25);
+    \node[below] at (1, 0) {$a_0^{-1}$};
+\end{tikzpicture}
+\end{document}

@@ -208,19 +208,22 @@ for all $\v{k}$. We then have:
 where we define $2(NU/\Omega) = E_0$. So the weak interactions of Helium modify the dispersion from particle like to sound-like at long wavelengths with linear dispersion relation.
 
 \subsubsection{Typical Helium-4 Interaction}
-The Fermi velocity scales as:
+The Fermi velocity for a typical interaction in Helium-4 scales with the wavevector as:
 \begin{figure}[htbp]
     \centering
-    \textcolor{blue}{$v_k$ vs. $\v{k}$.}
-    \caption{<caption>}
-    \label{<label>}
+    \includegraphics[]{Images/fig-Hevelocity.pdf}
+
+    \caption{$v_\v{k}$ vs. $\abs{\v{k}}$ for a typical Helium-4 interaction.}
+    \label{fig-Hevelocity}
 \end{figure}
+
 From this we obtain a dispersion relation that looks as follows:
 \begin{figure}[htbp]
     \centering
-    \textcolor{blue}{dispersion relation}
-    \caption{<caption>}
-    \label{<label>}
+    \includegraphics[]{Images/fig-Hedispersion.pdf}
+
+    \caption{Dispersion relation for a typical Helium-4 interaction. The dispersion scales as $k$ for small $\abs{\v{k}}$ and as $k^2$ for large $\abs{\v{k}}$. The minima present in between the two regimes is known as the roton minimum.}
+    \label{fig-Hedispersion}
 \end{figure}
 
 This concludes the Bogoliubov theory of Helium-4 in a nutshell. In the next assignment we will explicitly calculate the coefficients in the Bogoliubov transformation and other fun exercises.
@@ -232,9 +235,9 @@ Landau considered the following scenario. He considered a vessel of liquid Heliu
 
 \begin{figure}[htbp]
     \centering
-    \textcolor{blue}{TODO- cartoon figure}
-    \caption{<caption>}
-    \label{<label>}
+    \includegraphics[]{Images/fig-Landaucartoon.pdf}
+    \caption{Setting of the Landau argument for the superfluidity criterion. A heavy object with mass $M$ travels through a vessel of liquid Helium-4 with velocity $\v{v}$; can it relax its energy/momentum by emitting a quasiparticle of wavevector $\v{k}$?}
+    \label{fig-Landaucartoon}
 \end{figure}
 
 We will show that it is impossible to conserve both energy and momentum and for the particle to relax so long as the object does not exceed a critical velocity $v_c$. Energy conservation and momentum conservation tell us that:
@@ -253,17 +256,18 @@ We can divide out by $2M$ and combine the two conservation equations to find:
 \begin{equation}
     \hbar \v{v} \cdot \v{k} = \frac{\hbar^2\v{k}^2}{2M} + \hbar \omega_\v{k}
 \end{equation}
-We consider $M \gg m$. and so we can neglect the $ \frac{\hbar^2\v{k}^2}{2m}$ term. Further we can let $\v{v} \cdot \v{k} = \abs{\v{v}}\abs{\v{k}}\cos\theta$ and so:
-\begin{equation}
+We consider $M \gg m$. and so we can neglect the $ \frac{\hbar^2\v{k}^2}{2m}$ term. Further we can let $\v{v} \cdot \v{k} = \abs{\v{v}}\abs{\v{k}}\cos\theta$ (where $\theta$ is the angle between the velocity and the wavevector of the emitted quasiparticle) and so:
+\begin{equation}\label{eq-superfluidkomegak}
     \hbar \abs{\v{v}}\abs{\v{k}}\cos\theta = \hbar \omega_\v{k}
 \end{equation}
 For low enough velocities, the LHS will always be less than the RHS.
 
 \begin{figure}[htbp]
     \centering
-    \textcolor{blue}{TODO- roton curve with bound}
-    \caption{<caption>}
-    \label{<label>}
+    \includegraphics[]{Images/fig-fig-graphicalsuperfluidsoln.pdf}
+
+    \caption{Since $\cos\theta \leq 1$, for all $\theta$ the LHS ($\hbar vk\cos\theta$) of Eq. \eqref{eq-superfluidkomegak} will be less than the RHS ($\hbar \omega_\v{k}$).}
+    \label{fig-graphicalsuperfluidsoln}
 \end{figure}
 
 The graphical solution shows that slow moving objects cannot dissipate energy and momentum in liquid Helium-4. We therefore have dissipationless motion, or superflow.

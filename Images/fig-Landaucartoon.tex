@@ -1,0 +1,14 @@
+\documentclass[10pt]{standalone}
+\usepackage{commands}
+
+\begin{document}
+\begin{tikzpicture}
+    \draw[thick] (0, 0) -- (0, 2) -- (3, 2) -- (3, 0) -- cycle;
+    \draw[thick] (0.75, 1) circle (8pt);
+    \node[]at (0.75, 1) {M};
+    \draw[-latex, thick] (1.05, 1) -- (1.75, 1);
+    \node[below] at (1.35, 1) {$\v{v}$};
+    \draw[-latex, blue, thick] (1, 1.1) -- (1.7, 1.8);
+    \node[above, blue] at (1.2, 1.4) {$\v{k}$};
+\end{tikzpicture}
+\end{document}

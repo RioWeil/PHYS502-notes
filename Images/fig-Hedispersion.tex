@@ -1,0 +1,14 @@
+\documentclass[10pt]{standalone}
+\usepackage{commands}
+
+\begin{document}
+\begin{tikzpicture}
+    \draw[-latex, thick] (0, 0) -- (0, 3);
+    \draw[-latex, thick] (0, 0) -- (3, 0);
+    \node[left] at (0, 3) {$\omega_\v{k}$};
+    \node[below] at (3, 0) {$\abs{\v{k}}$};
+    \draw [thick, blue, -latex] plot [smooth, tension=1] coordinates { (0,0) (1,1) (1.5,0.5) (2.5,2)};
+    \node[above, blue] at (0.3, 0.7) {$\sim k$};
+    \node[above, blue] at (2, 1.5) {$\sim k^2$};
+\end{tikzpicture}
+\end{document}

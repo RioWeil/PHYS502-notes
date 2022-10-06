@@ -1,0 +1,25 @@
+\documentclass[10pt]{standalone}
+\usepackage{commands}
+
+\begin{document}
+\begin{tikzpicture}
+    \filldraw[] (0, 0) circle (5pt);
+    \filldraw[] (2, 0) circle (5pt);
+    \filldraw[] (4, 0) circle (5pt);
+    \filldraw[] (6, 0) circle (5pt);
+    \filldraw[] (8, 0) circle (5pt);
+    \node[below] at (4, -0.2) {M};
+    \draw[spring] (0.15,0) -- (1.85,0);
+    \draw[spring] (2.15,0) -- (3.85,0);
+    \draw[spring] (4.15,0) -- (5.85,0);
+    \draw[spring] (6.15,0) -- (7.85,0);
+    \draw[red, thick, ->] (4, 0.4) -- (5, 0.4);
+    \node[above, red] at (4.5, 0.4) {$u_l$};
+    \draw[red, thick, ->] (6, 0.4) -- (7, 0.4);
+    \node[above, red] at (6.5, 0.4) {$u_{l+1}$};
+    \draw[red, thick, ->] (2, 0.4) -- (3, 0.4);
+    \node[above, red] at (2.5, 0.4) {$u_{l-1}$};
+    \node[left] at (-0.2, 0) {\dots};
+    \node[right] at (8.2, 0) {\dots};
+\end{tikzpicture}
+\end{document}
