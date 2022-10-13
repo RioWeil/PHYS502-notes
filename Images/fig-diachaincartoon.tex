@@ -1,0 +1,27 @@
+\documentclass[10pt]{standalone}
+\usepackage{commands}
+
+\begin{document}
+\begin{tikzpicture}
+    \draw[spring] (0.15,0) -- (1.85,0);
+    \draw[spring] (2.15,0) -- (3.85,0);
+    \draw[spring] (4.15,0) -- (5.85,0);
+    \draw[spring] (6.15,0) -- (7.85,0);
+    \filldraw[] (0, 0) circle (5pt);
+    \filldraw[fill=blue, draw = blue] (2, 0) circle (5pt);
+    \filldraw[] (4, 0) circle (5pt);
+    \filldraw[fill=blue, draw=blue] (6, 0) circle (5pt);
+    \filldraw[] (8, 0) circle (5pt);
+    \node[below] at (4, -0.2) {$M_1$};
+    \node[below] at (6, -0.2) {$M_2$};
+    \node[below] at (5, -0.2) {$K$};
+    \draw[green, dashed] (-0.25, -0.5) -- (-0.25, 0.5) -- (3.75, 0.5) -- (3.75, -0.5) -- cycle;
+    \node[green, above] at (2, 0.5) {Unit cell};
+    \draw[red, thick, ->] (4, 0.4) -- (5, 0.4);
+    \node[above, red] at (4.5, 0.4) {$u_{l1}$};
+    \draw[red, thick, ->] (6, 0.4) -- (7, 0.4);
+    \node[above, red] at (6.5, 0.4) {$u_{l2}$};
+    \node[left] at (-0.2, 0) {\dots};
+    \node[right] at (8.2, 0) {\dots};
+\end{tikzpicture}
+\end{document}
