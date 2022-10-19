@@ -161,7 +161,7 @@ So to this end we compute:
 \begin{equation}
     \begin{split}
         \alpha^\dag_{\v{k}}\alpha_\v{k} &= (\mu_{\v{k}}a^\dag_\v{k} - \nu_\v{k}a_{-\v{k}})(\mu_{\v{k}}a_\v{k} - \nu_\v{k}a^\dag_{-\v{k}})
-        \\ &= \mu_\v{k}^2a^\dag_\v{k}a_\v{k} + v_k^2a_{-\v{k}}a^\dag_{-\v{k}} - \mu_\v{k}\nu_{\v{k}}(a_\v{k}a_{-\v{k}} + a^\dag_{\v{k}}a^\dag_{-\v{k}})
+        \\ &= \mu_\v{k}^2a^\dag_\v{k}a_\v{k} + \nu_\v{k}^2a_{-\v{k}}a^\dag_{-\v{k}} - \mu_\v{k}\nu_{\v{k}}(a_\v{k}a_{-\v{k}} + a^\dag_{\v{k}}a^\dag_{-\v{k}})
     \end{split}
 \end{equation}
 Comparing this with the form of the Hamiltonian, we can see we are on the right track. The only terms to seem to not appear there are the $a_{-\v{k}}a^\dag_{-\v{k}}$s but we recognize the sum to run over all $\v{k}$ and so we can make a substitution there. We make an assumption that $\omega_\v{k} = \omega_{-\v{k}}$ and $\nu_{\v{k}}^2 = \nu_{-\v{k}}^2$ (we can check later that this is consistent) then:
@@ -179,7 +179,7 @@ To solve for $\omega_{\v{k}}$ we square both equations and subtract:
 \begin{align*}
     (\hbar \omega_{\v{k}})^2\left[(\mu_{\v{k}}^2 + \nu_{\v{k}}^2)^2 - 4\mu_{\v{k}}^2\nu_{\v{k}}^2\right] = (\hbar\Omega_{\v{k}})^2 - \eta_{\v{k}}^2
 \end{align*}
-but on the RHS We have $(\mu_{\v{k}} - \nu_{\v{k}})^2 = 1$ and so the dependence on $\mu/\nu$ drops out and we have:
+but on the LHS We have $(\mu_{\v{k}}^2 - \nu_{\v{k}}^2)^2 = 1$ and so the dependence on $\mu/\nu$ drops out and we have:
 \begin{equation}
     \hbar\omega_{\v{k}} = \sqrt{\hbar^2\Omega_{\v{k}}^2 - \eta_\v{k}^2} = \sqrt{\e_{\v{k}}(\eta_\v{k} + 2NV_\v{k})}
 \end{equation}
