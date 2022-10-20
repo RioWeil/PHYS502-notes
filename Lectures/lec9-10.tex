@@ -192,19 +192,21 @@ so for $T \gg \theta_D$ we find that $C_V$ is independent of temperature. This i
 
 \begin{figure}[htbp]
     \centering
-    \textcolor{blue}{TODO: specific heat plot as a function of $T$}
-    \caption{<caption>}
-    \label{<label>}
+    \includegraphics[scale=0.7]{Images/fig-phononspecificheat.pdf}
+
+    \caption{Specific heat for phonons as a function of temperature $T$. At low $T$ we see $C_V \sim T^3$ behavior. At high $T$ we see that $C_V$ tends to a constant of $3Nk_B$.}
+    \label{fig-phononspecificheat}
 \end{figure}
 
 \subsection{Einstein Model}
-Is a model suitable for the study of optical phonons. We place the dispersion relation for an optical phonon with an average $\omega_0$.
+Is a model suitable for the study of optical phonons. We replace the dispersion relation for an optical phonon with an average $\omega_0$.
 
 \begin{figure}[htbp]
     \centering
-    \textcolor{blue}{TODO}
-    \caption{<caption>}
-    \label{<label>}
+    \includegraphics[scale=0.7]{Images/fig-einsteinmodelapprox.pdf}
+
+    \caption{Dispersion relation for acoustic and optical modes of phonons, and Einstein's approximation for replacing the optical mode dispersion relation with a straight line at the average $\omega_0$.}
+    \label{fig-einsteinmodelapprox}
 \end{figure}
 
 
@@ -221,6 +223,13 @@ At low $T$, we have $\beta\hbar\omega_0 \gg 1$ and so:
     C_V \approx N k_B\left(\frac{\hbar\omega_0}{k_B T}\right)^2 e^{-\frac{\hbar\omega_0}{k_B T}}
 \end{equation}
 so we have ``exponentially activated behavior'' here.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.7]{Images/fig-einsteinmodelspecificheat.pdf}
+    \caption{Plot of the low-$T$ specific heat as calculated by the Einstein model. We see the exponentially activated behavior, where past $\hbar\omega_0$ the specific heat sharply spikes.}
+    \label{fig-einsteinmodelspecificheat}
+\end{figure}
 
 Interestingly, if we compare the two plots for the specific heat, they agree pretty well. Some differences at the very low $T$ limits, however. For the low $T$ einstein model at very low temperatures we do not even have one quantum of energy to excite, and so we have $C_V = 0$. Conversely, for the acoustic modes we are able to excite things at even very low temperatures (so long as the temperature is not zero).
 
@@ -267,37 +276,26 @@ In translation-invariant systems, this can be expressed as:
 \end{equation}
 This looks absolutely terrible, but people have come up with clever ways to analyze such Hamiltonians, namely through the graphical means of Feynman diagrams. Each of the product of three terms contains an annhilation and creation operator. If we were to multiply them out, we would get six terms, which could be represented as follows:
 
-\begin{figure}[htbp]
-    \centering
-    \textcolor{blue}{Three-phonon creation FD}
-    \caption{<caption>}
-    \label{<label>}
-\end{figure}
 
 \begin{figure}[htbp]
     \centering
-    \textcolor{blue}{One phonon splits into two}
-    \caption{<caption>}
-    \label{<label>}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \textcolor{blue}{Two phonons join to make one}
-    \caption{<caption>}
-    \label{<label>}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \textcolor{blue}{Three phonons disappear}
-    \caption{<caption>}
-    \label{<label>}
+    \includegraphics[scale=0.7]{Images/fig-threephonondiagrams.pdf}
+    
+    \caption{The four Feynman diagrams for three phonon interactions that come up in the third order term. In each diagram time runs from left to right. The leftmost diagram represents the creation of three phonons. The second diagram represents the destruction of one phonon and creation of two phonons. The third diagram represents the destruction of two phonons and creation of one phonon. Finally, the fourth diagram represents the destruction of three phonons.}
+    \label{fig-threephonondiagrams}
 \end{figure}
 
 we can then assign a mathematical quantity to each of these diagrams, and thus evaluate each of their contributions in a clever way.
 
 Without writing down the Hamiltonian, we can also look at the diagrams that arise in the fourth-order Hamiltonian $H_4$. We would have a product of four terms, which creates a sum with four phonons. Again, each of these diagrams could be assigned a mathematical quantity to evaluate their contribution.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.7]{Images/fig-fourphonondiagrams.pdf}
+    
+    \caption{Feynman diagrams for four phonon interactions that come up in the fourth order term. In each diagram time runs from left to right. The leftmost diagram represents the most dominantly contributing interaction, which is the scattering of two phonons. There are other interactions that also contribute, for example the destruction of one phonon and creation of three phonons as depicted in the right diagram.}
+    \label{fig-fourphonondiagrams}
+\end{figure}
 
 \subsection{Thermal Conductivity}
 In Drude theory, electrons contribute:
