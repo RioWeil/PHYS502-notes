@@ -162,5 +162,150 @@ We have:
         \\ &= gNk_B\left(\frac{T}{\theta_D}\right)^3\int_0^{\theta_D/T} dx \frac{x^4e^x}{(e^x - 1)^2}
     \end{split}
 \end{equation}
-where we have made the substitution $x = \beta\hbar\omega$. We call the integral $f(\theta_D/T)$ the Debye function.
+where we have made the substitution $x = \beta\hbar\omega$. We call the integral $f(\theta_D/T) = f(x_D)$ the Debye function.
 
+We now analyze some consequences. In principle we can solve the integral numerically, but we can also start by studying the integral analytically in two limits.
+
+\subsubsection{Low T behavior}
+In this limit we have $T \ll \theta_D$ and hence $x_D = \frac{\theta_D}{T} \gg 1$. We can therefore write:
+\begin{align*}
+    f(x_D) = \int_0^\infty \frac{x^4 e^x}{(e^x - 1)^2} - \int_{x_D}^\infty \frac{x^4 e^x}{(e^x - 1)^2} \approx \frac{4\pi^4}{15} - \int_{x_D}^\infty x^4 e^{-x} \approx \frac{4\pi^4}{15}
+\end{align*}
+where we have evaluated the first term analytically (calculus exercise) and the second integral we have that $x \gg 1$ over the rande of integration and we may therefore approximate $\frac{x^4e^x}{(e^x - 1)^2} \approx x^4 e^{-x}$. Since this is an exponentially small term, we can drop it. The specific heat then becomes:
+\begin{equation}
+    C_V \approx \frac{12\pi^4}{5}Nk_B\left(\frac{T}{\theta_D}\right)^3
+\end{equation}
+so for $T \ll \theta_D$ we find $C_V \sim T^3$. This is obeyed in many solids.
+
+\subsubsection{High T behavior}
+In this limit, we have $T \gg \theta_D$ and so $x_D \ll 1$. We therefore may expand $e^x$ to leading order in the integrand. This yields:
+\begin{align*}
+    f(x_D) \approx \int_0^{x_D}dx \frac{x^4}{(1+x-1)^2} = \int_0^{x_D} dx x^2 = \frac{1}{3}x_D^3
+\end{align*}
+where in the numerator we have approximated $e^x \sim 1$ and in the numerator we have approximated $e^x \sim 1 + x$.
+
+So plugging this back into our specific heat expression:
+\begin{equation}
+    C_V \approx 3Nk_B
+\end{equation}
+so for $T \gg \theta_D$ we find that $C_V$ is independent of temperature. This is the Dulong-Petit law; this is the heat capacity of a harmonic crystal in classical theory (i.e. no quantum effects). If we recall the equipartition theorem, we have $N$ atoms oscillating in $3$ directions, so $3$ vibrational degrees of freedom and $3$ kinetic degrees of freedom and so $6N$ degrees of freedom in total. Equipartition associates $\frac{1}{2}k_B T$ per energy per degree of freedom and so we have $U = 6N \cdot \frac{1}{2}k_B T = 3Nk_B T$ of energy and hence $C_V = 3Nk_B$ specific heat. This of course in some sense makes sense as at high temperatures we expect quantum effects to be washed out and the system behaves basically classically (though an interesting point to note here - the quantum effect of the suppression of specific heat persists up to room temperature, as $\theta_D$ is on the order of hundreds of Kelvin; we do not have to cool our system to very low temperature for the quantum effects to become significant). This was known before QM was invented, but disagreed with experiment, where the specific heat went to zero at zero temperature (though it described the high-$T$ behavior well). With quantum mechanics, we are able to obtain a prediction that described experimental results very well.
+
+\begin{figure}[htbp]
+    \centering
+    \textcolor{blue}{TODO: specific heat plot as a function of $T$}
+    \caption{<caption>}
+    \label{<label>}
+\end{figure}
+
+\subsection{Einstein Model}
+Is a model suitable for the study of optical phonons. We place the dispersion relation for an optical phonon with an average $\omega_0$.
+
+\begin{figure}[htbp]
+    \centering
+    \textcolor{blue}{TODO}
+    \caption{<caption>}
+    \label{<label>}
+\end{figure}
+
+
+We consider an approximate phonon density of states:
+\begin{align*}
+    D(\omega) = N\delta(\omega - \omega_0)
+\end{align*}
+and from this we can calculate contribute to the heat capacity:
+\begin{equation}
+    C_V = \frac{1}{k_B T^2}\int_0^\infty d\omega\frac{(\hbar\omega)^2 e^{\beta\hbar\omega}}{(e^{\beta\hbar\omega} - 1)^2}D(\omega) = \frac{N}{k_BT^2}\frac{(\hbar\omega_0)^2 e^{\beta\hbar\omega_0}}{(e^{\beta\hbar\omega_0} - 1)^2}
+\end{equation}
+At low $T$, we have $\beta\hbar\omega_0 \gg 1$ and so:
+\begin{equation}
+    C_V \approx N k_B\left(\frac{\hbar\omega_0}{k_B T}\right)^2 e^{-\frac{\hbar\omega_0}{k_B T}}
+\end{equation}
+so we have ``exponentially activated behavior'' here.
+
+Interestingly, if we compare the two plots for the specific heat, they agree pretty well. Some differences at the very low $T$ limits, however. For the low $T$ einstein model at very low temperatures we do not even have one quantum of energy to excite, and so we have $C_V = 0$. Conversely, for the acoustic modes we are able to excite things at even very low temperatures (so long as the temperature is not zero).
+
+\subsection{Anharmonic Effects and Phonon Interactions}
+We take a step back and regard a solid (metal) as a collection of electrons (fermions) and phonons (bosons).
+
+At low $T$, both the electrons and phonons contribute to thermodynamic (and other) properties, e.g. specific heat:
+\begin{align*}
+    C_V^{ph} \approx 6T^3 \text{ (Debye)}
+\end{align*}
+\begin{align*}
+    C_V^{el} \approx aT \text{ (Sommerfield)}
+\end{align*}
+both are crucially quantum mechanical; if we forget quantum mechanics then these become temperature dependent constants. The total specific heat is the sum of the two:
+\begin{align*}
+    C_V = C^{el}_V + C^{ph}_V \approx aT + bT^3
+\end{align*}
+or:
+\begin{equation}
+    \frac{C_V}{T} \approx a + bT^2
+\end{equation}
+and many (most) metals behave in this way. This is a huge success of quantum theory and modern solid-state physics.
+
+However, there are some significant failures of this model:
+\begin{enumerate}
+    \item Thermal expansion (Within the harmonic expansion, you can prove this does not occur)
+    \item Thermal conductivity (Phonons to not carry heat in this model)
+    \item Sound attenuation (Sound attenuates forever)
+\end{enumerate}
+but whenever our theories fail, we can look back to what approximations we have made, and see what things to improve. These three failures can be understood by incorporating anharmonic effects. In the harmonic approximation, we threw away all terms past the second derivative, but we could consider successive terms of order:
+\begin{equation}
+    H_3 = \frac{1}{3!}\sum_{RR'R''ijk}\mu_R^i \mu_{R'}^j \mu_{R''}^{k} V^{ijk}_{RR'R''}
+\end{equation}
+where:
+\begin{equation}
+    V^{ijk}_{RR'R''} = \left. \frac{\partial^3 V}{\partial \mu_R^i \partial \mu_{R'}^j \partial \mu_{R''}^k}\right|_{\mu=0}
+\end{equation}
+
+Note that the inclusion of these third-order terms is sufficient to describe thermal expansion and sound attenuation. To obtain thermal conductivity from the model, one needs to go to fourth order.
+
+In translation-invariant systems, this can be expressed as:
+\begin{equation}
+    H_3 = \frac{1}{6\sqrt{N}}\left(\frac{\hbar}{2M}\right)^{3/2}\sum_{qq'q''ijk\mu\nu\lambda}\frac{S_\mu^i S_\nu^j S_\lambda^k}{(\omega_{q\mu}\omega_{q'\nu}\omega_{q''\lambda})^{1/2}}V^{ijk}_{qq'q''}\Delta (\v{q} + \v{q}' + \v{q}'') (a_{-q\mu}^\dag + a_{q\mu})(a^\dag_{-q'\nu} + a_{q'\nu})(a^\dag_{-q''\lambda} + a_{q''\lambda})
+\end{equation}
+This looks absolutely terrible, but people have come up with clever ways to analyze such Hamiltonians, namely through the graphical means of Feynman diagrams. Each of the product of three terms contains an annhilation and creation operator. If we were to multiply them out, we would get six terms, which could be represented as follows:
+
+\begin{figure}[htbp]
+    \centering
+    \textcolor{blue}{Three-phonon creation FD}
+    \caption{<caption>}
+    \label{<label>}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \textcolor{blue}{One phonon splits into two}
+    \caption{<caption>}
+    \label{<label>}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \textcolor{blue}{Two phonons join to make one}
+    \caption{<caption>}
+    \label{<label>}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \textcolor{blue}{Three phonons disappear}
+    \caption{<caption>}
+    \label{<label>}
+\end{figure}
+
+we can then assign a mathematical quantity to each of these diagrams, and thus evaluate each of their contributions in a clever way.
+
+Without writing down the Hamiltonian, we can also look at the diagrams that arise in the fourth-order Hamiltonian $H_4$. We would have a product of four terms, which creates a sum with four phonons. Again, each of these diagrams could be assigned a mathematical quantity to evaluate their contribution.
+
+\subsection{Thermal Conductivity}
+In Drude theory, electrons contribute:
+\begin{equation}
+    \kappa_{el} = \frac{1}{3}C^{el}_V v_F l
+\end{equation}
+with $C^{el}_V$ the electronic specific heat, $v_F$ the Fermi velocity, and $l$ is the mean-free path - this is where many different details and factors come in (and generically very hard to calculate); this is where anharmonic effects enter. An electron that travelled forever would contribute an infinite conductivity - this does not happen so there must be features in our metal that slow it down, e.g. impurities. For phonons, we have (analogously)
+\begin{equation}
+    \kappa_{ph} = \frac{1}{3}C^{ph}_V c l'
+\end{equation}
+and again $l'$ the mean free path is where anharmonic effects enter (e.g. collisions of phonons with electrons).
