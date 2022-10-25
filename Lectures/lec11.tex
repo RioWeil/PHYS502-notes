@@ -6,16 +6,16 @@ Magnons occur as excitations in spin Hamiltonians describing magnetic systems.
 
 \begin{figure}[htbp]
     \centering
-    \textcolor{blue}{TODO: Sketch of ferromagnetic and antiferromagnetic systems}
-    \caption{<caption>}
-    \label{<label>}
+    \includegraphics[]{Images/fig-FMAFMHeisenbergchain.pdf}
+    \caption{Cartoon depiction of the 1-D Heisenberg chain. For $J > 0$ we have a ferromagnet with aligned spins. For $J < 0$ we have an antiferromagnet with alternating spins. Nearest neighbour spins are coupled, and there is an external magnetic field that affects each spin.}
+    \label{fig-FMAFMHeisenbergchain}
 \end{figure}
 
 Here, we will discuss the simplest such Hamiltonian describing a magnetic system, the Heisenberg model. It is written as:
 \begin{equation}
     H = -J\sum_{j, \delta}\v{S}_j \cdot \v{S}_{j+\delta} - 2B\sum_j S_j^z
 \end{equation}
-Where the first term represents the coupling between spins, parameterized by a coupling constant $J$ (where $J > 0$ gives rise to a ferromagnetic phase and $J < 0$ to an antiferromagnetic phase), and the second term represents the contribution from an external magnetic field with strength $B$. Note that this Hamiltonian is completely invariant under the choice of $z$-axis; more formally, it is invariant under $SU(2)$ rotations.
+Where the first term represents the coupling between spins, parameterized by a coupling constant $J$ (where $J > 0$ gives rise to a ferromagnet and $J < 0$ to an antiferromagnet), and the second term represents the contribution from an external magnetic field with strength $B$. Note that this Hamiltonian is completely invariant under the choice of $z$-axis; more formally, it is invariant under $SU(2)$ rotations.
 
 Note that $\v{S}_j = (S_j^x, S_j^y, S_j^z)$ is a spin operator at site $j$ that obeys:
 \begin{equation}\label{eq-spinalgebra}
@@ -85,15 +85,16 @@ with $\gamma_k = \frac{1}{z}\sum_{\gv{\delta}}e^{i\v{k}\cdot\gv{\delta}}$. If we
 
 \begin{figure}[htbp]
     \centering
-    \textcolor{blue}{TODO - delta vectors for 2D square lattice}
-    \caption{<caption>}
-    \label{<label>}
+    \includegraphics[]{Images/fig-2dsquarelatticedeltas.pdf}
+   
+    \caption{The four $\gv{\delta}$ vectors for the 2D square lattice. Each atom has neighbours at $\delta = \pm \xhat$, $\delta = \pm \yhat$.}
+    \label{fig-2dsquarelatticedeltas}
 \end{figure}
 
 Note that this form of $\mathcal{H}_0$ is valid for lattices with an inversion center which implies $\gamma_\v{k} = \gamma_{-\v{k}}$. Without this condition the form of $\mathcal{H}_0$ would be more complicated. One way to think about this is a lattice has an inversion center if for every lattice site, there is both a $\gv{\delta}$ and $-\gv{\delta}$ nearest neighbour. This would not be the case (e.g.) for a honeycomb lattice.
 
 $\mathcal{H}_1$ contains higher order terms in $b_k, b_k^\dag$ and represents magnon interactions.
-]
+
 The situation is analogous to phonons; we made a harmonic approximation, which gave us a nice quadratic Hamiltonian. The higher order terms represented interactions of the phonons. The mechanics is different here but the idea is the same; we have a ``nice'' quadratic Hamiltonian $\mathcal{H}_0$ and then the higher order terms in $\mathcal{H}_1$ representing magnon interactions. Similar to phonons where the harmonic approx was sufficient to describe lattice vibrations but not expansions, we will find that thermodynamics is described well by the lower-order expansion, but (e.g.) thermal conduction will require the higher order terms to analyze.
 
 We write things suggestively as:
