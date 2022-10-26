@@ -139,12 +139,56 @@ The integral is dimensionless, so the temperature dependence is entirely in the 
     C_V = \dod{U}{T} = 0.113k_B(k_B T/D)^{3/2}
 \end{equation}
 we have another different temperature dependence of the heat capacity! For electrons, $C_V \sim T$, for phonons, $C_V \sim T^3$, and for magnonons, we have $C_V \sim T^{3/2}$. This suggests that if we have an insulating (i.e. no electronic contribution) antiferromagnet, to observe $C_V$ we include a phonon contribution $\sim bT^3$ which means that:
-\begin{equation}
+\begin{align*}
     C_V^{tot} = cT^{3/2} + bT^3
-\end{equation}
+\end{align*}
 we can then plot $C_V^{tot}/T^{3/2}$ vs. $T^{3/2}$, which gives us a straight line with intercept $c$ as:
 \begin{align*}
     \frac{C_V^{tot}}{T^{3/2}} = c + bT^{3/2}.
 \end{align*}
 
-One last comment: The midterm will cover what was covered today, the last bit covered next day, and a reading assignment on antiferromagnetic magnons which is on pages 58-62 on the handout.
+\textbf{Reading Assignment:} Antiferromagnetic magnons - see pages 58-62 in the handout (Kittel's \emph{Quantum Theory of Solids}).
+
+\subsection{Magnetization Reversal}
+We expect the total magnetization:
+\begin{align*}
+    M_s = 2\mu_0 \sum_j \avg{S_j^z}
+\end{align*}
+to decrease as $T$ is raised and more magnons are thermally excited. We can calculate this by going into magnon variables:
+\begin{equation}
+    M_S(T) = 2\mu_0 \left(NS - \sum_\v{k}\avg{b^\dag_\v{k}b_\v{k}}\right)
+\end{equation}
+We are interested in $\Delta M(T) = M_S(0) - M_S(T)$:
+\begin{equation}
+    \Delta M(T) = 2 \mu_0\sum_\v{k}\avg{\hat{n}_\v{k}} = \frac{2\mu_0 V}{(2\pi)^d}\int_0^{k_{max}} d^dk \frac{1}{e^{\beta Dk^2} - 1}
+\end{equation}
+Let's calculate the integral. Note that $k_{max}$ is the momentum cutoff analogous to the Debye momentum for phonons. The integrand only depends on the magnitude of $\v{k}$, so we can carry out the angular integrals to give us the surface $S_d$ of the $d$-dimensional unit sphere (e.g. $S_3 = 4\pi, S_2 = 2\pi$):
+\begin{align*}
+    \Delta M(T) = S_d V \int_0^{k_{\text{max}}} dk k^{d-1}\frac{1}{e^{\beta Dk^2} - 1}
+\end{align*} 
+substituing $x = \beta Dk^2$, $dx = 2\beta Dk dk$ we find:
+\begin{equation}
+    \begin{split}
+        \Delta M(T) &= S_D V \int_0^{x_m} \frac{dx}{\beta D}\left(\frac{x}{\beta D}\right)^{\frac{d-2}{2}}\frac{1}{e^x - 1}
+        \\ &= S_D V \left(\frac{k_B T}{D}\right)^{d/2}\int_0^{x_m}\frac{x^{(d-2)/2}}{e^x - 1}dx
+    \end{split}
+\end{equation}
+The behaviour near $x = 0$ is interesting. Because $e^x \- 1 \sim x$ for $x \ll 1$, the integral diverges at the lower bound when $d \leq 2$. This implies that thermal fluctuations tend to destabilize ferromagnetic order in low dimensions (that is to say, $d \leq 2$). This of course is an approximate treatment, but you can analyze this much more carefully and this is indeed a correct result. Strictly speaking, in 2D ferromagnetic order only exists at zero temperature, and as soon as you raise the temperature above zero, you get long wavelength fluctuations and the average magnetization is immediately zero. The same is true of 1 dimension. In three dimensions this is not a problem, as the integral is not convergent. At $T = 0$ we have a perfectly ordered ferromagnetic, and as we increase the temperature the magnetization decreases, as $\Delta M(T) \sim T^{3/2}$. This is experimentally observed.
+
+\begin{figure}[htbp]
+    \centering
+    
+    \caption{<caption>}
+    \label{<label>}
+\end{figure}
+
+A concrete example that you may try at home: Fridge magnets lose their magnetic properties when heated up. Interestingly, when you cool them back down, you find that the magnetization is still zero. This is because the rise of domains within the magnet when cooled past the critical temperature, which makes the net average magnetization zero. It can however be re-magnetized in the presence of a second magnet.
+
+\begin{figure}[htbp]
+    \centering
+    
+    \caption{<caption>}
+    \label{<label>}
+\end{figure}
+
+% Midterm Cutoff
