@@ -89,13 +89,6 @@ Therefore:
     E_k^{(2)} = \sum_{k' \neq k, G, G'}\frac{U_G U_{G'}^* \delta_{k,k'+G}\delta_{k, k'+G'}}{\e_{k'} - \e_k} = \sum_{G \neq 0,G'} \frac{U_G U_{G'}^* \delta_{GG'}}{\e_{k+G} - \e_k} = \sum_{G \neq 0} \frac{\abs{U_G}^2}{\e_{k+G} - \e_k}
 \end{equation}
 
-\begin{figure}[htbp]
-    \centering
-    
-    \caption{<caption>}
-    \label{<label>}
-\end{figure}
-
 For small $\abs{U_G}$, this correction is small, EXCEPT when $\abs{\e_{k - G} - \e_k}$ is also small. This occurs at specific values of $\v{k} = \frac{1}{2}\v{G}$ (valid also in 3D). However this is not the final answer; in reality there will not be an infinite correction. What's the catch? When we do perturbation theory as we have, we assume that the energy levels are non-degenerate; but here there is a degeneracy. Hence, at and near $\v{k} = \frac{1}{2}\v{G}$, we must apply degenerate perturbation theory because $\e_{k - G} = \e_k$ and this could be viewed as a degeneracy.
 
 \subsection{Degenerate Perturbation Theory}
@@ -120,3 +113,11 @@ Note for $k = \frac{1}{2}G$, i.e. the degeneracy point, this implies:
     E_k = \e_k \pm \abs{U_G}.
 \end{equation}
 So we have an energy gap! This quantifies the distinction of metals and insulators, using quantum mechanics; we will go further into this discussion next class.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.7]{Images/fig-energyvskgap.pdf}
+    
+    \caption{Plot of the energy $\e_k$ and $\e_{k-G}$ as a function of $k$. At $k = \frac{1}{2}G$ the two energy functions coincide. At and near this point, non-degenerate perturbation theory breaks down. A more careful treatment using degenerate perturbation theory shows that there are two energy levels, separated by a gap $2\abs{U_G}$.}
+    \label{fig-energyvskgap}
+\end{figure}
