@@ -116,3 +116,91 @@ For simplicity, let us illustrate the case with $t_2 = 0$. We sketch the lines o
 \end{figure}
 
 We find that $\e_{\text{min}} = \e(\v{k} = \v{0}) = \e_0 - 4t$ and $\e_{\text{max}} = \e(\v{k} = (\frac{\pi}{a}, \frac{\pi}{a})) = \e_0 + 4t$. The bandwidth is $W = \e_{\text{max}} - \e_{\text{min}} = 8t$. 
+
+A standard undergraduate question: if we have a 2D square lattice and each atom contributes one electron, do we have a metal or an insulator? To answer this, we recall that the number of $k$ states in the band is equal to the number of unit cells in the crystal.
+
+On the face of it, it seems like all of the $N$ states would be filled with electrons so we would have an insulator. But taking into account spin, there are $2N$ states, so we only fill half of the states, corresponding to all of the states inside of the diamond. This meets the definition of a metal!
+
+\begin{figure}[htbp]
+    \centering
+    
+    \caption{<caption>}
+    \label{<label>}
+\end{figure}
+
+\subsubsection{Effective Mass}
+The effective mass for these electrons can be defined near either the minima or the maxima of the dispersion by expanding it to second order in momenta and study the long wavelength behavior.
+\begin{enumerate}[(i)]
+    \item Near $\v{k} = \v{0}$, we can expand:
+    \begin{equation}
+        \e(\v{k}) = \e_0 - 2t_1(1 - \frac{(ak_x)^2}{2} + \ldots + 1 - \frac{(ak_y)^2}{2} + \ldots) = (\e_0 - 4t_1) + t_1a^2k^2 + \ldots 
+    \end{equation}
+    In the literature, often $t_1a^2k^2$ is written as $\frac{\hbar^2 k^2}{2m^*}$ with $m^* = \frac{\hbar^2}{2t_1a^2}$ the effective mass. In principle this could be larger or smaller than the real electron mass, and in the literature when things such as ``heavy electrons'' are discussed, these are compounds where the band mass of the electrons is heavy. In conclusion, near $\v{k} = 0$ (the $\Gamma$ point) the tight-binding electron behaves as a particle of mass $m^*$.
+
+    \item Near $\v{k} = \left(\frac{\pi}{a}, \frac{\pi}{a}\right) \equiv \v{K}$, we expand:
+    \begin{equation}
+        \e(\v{k} + \v{K}) = (e_0 + 4t_1) - t_1a^2k^2 + \ldots
+    \end{equation}
+    where we now have the effective mass $m^* = -\frac{\hbar^2}{2t_1 a^2}$. The effective mass is negative! The carriers are holes.
+\end{enumerate}
+
+\subsubsection{Band Velocity}
+The group velocity is given by:
+\begin{equation}
+    \v{v}_\v{k} = \frac{1}{\hbar}\dpd{\e(\v{k})}{\v{k}} = \frac{2t_1a}{\hbar}(\sin(ak_x), \sin(ak_y))
+\end{equation}
+
+\begin{figure}[htbp]
+    \centering
+    
+    \caption{<caption>}
+    \label{<label>}
+\end{figure}
+
+Near $\v{k} = 0$, we have $\v{v}_\v{k} \approx \frac{2t_1a^2}{\hbar}\v{k}$. This is as expected for a free particle of mass $m^*$. Near $k_x = \frac{\pi}{a}$, we have $\v{v}_\v{k} = -\frac{2ta^2}{\hbar}\delta k_x$. This is very odd. The velocity is opposite to the change in momentum. This is however consistent with the effective mass being negative.
+
+One may ask what makes electrons behave in this strange way. The intuition of free space is violated here as the electron is not moving in free space (it is in the tight-binding model)! In the long wavelength limit the free space analogy may hold, but in other parts of the Bruillon zone this is simply not the case.
+
+Another point - this shows why it is important to distinguish between momentum and crystal momentum. Here we have crystal momentum, and we can see it really does not behave as we conventionally understand momentum.
+
+\subsection{Example - Lattice with a Basis (Dimerized chain)}
+\begin{figure}[htbp]
+    \centering
+    
+    \caption{<caption>}
+    \label{<label>}
+\end{figure}
+
+Our unit cell now contains two atoms, and is of length $2a$. Every atom in the chain can be labelled by the position of the unit cell and with $1/2$. We therefore write the Hamiltonian in second quantization notation as:
+\begin{equation}
+    H = \e_0 \sum_i \left[c_1^\dag(R_i)c_1(R_i) + c_2^\dag(R_i)c_2(R_i)\right] + t\sum_i\left[c_1^\dag(R_i)c_2(R_i + a) + h.c.\right] + t'\sum_i \left[c_1^\dag(R_i)c_2(R_i - a) + h.c.\right]
+\end{equation}
+where $c_1^\dag c_2$ describes a hop from site 2 to site 1 and h.c. the opposite. We solve this via a Fourier transform:
+\begin{align*}
+    c_\alpha(r) = \frac{1}{\sqrt{N}}\sum e^{ikr}c_{\alpha k}
+\end{align*}
+$\alpha = 1, 2$:
+\begin{equation}
+    H = \e_0\sum_{\alpha, k}c^\dag_{k, \alpha}c_{k, \alpha} + t\sum_k \left(c^\dag_{1k}c_{2k}e^{ika} + h.c.\right) + t'\sum_k \left(c^\dag_{1k}c_{2k}e^{-ika} + h.c.\right)
+\end{equation}
+Two solve, define a two-component spinor:
+\begin{align*}
+    \chi_k = \m{c_{1k} \\ c_{2k}}, \quad \chi_k^\dag = \m{c^\dag_{1k} & c^\dag_{2k}}
+\end{align*}
+and express the Hamiltonian (setting $a = 1$):
+\begin{equation}
+    H = \sum_k \chi_k^\dag h_k\chi_k, \quad  h_k = \m{\e_0 & te^{ik} + t'e^{-ik} \\ te^{-ik} + t'e^{ik} & \e_0}
+\end{equation}
+We diagonalize this matrix, setting $\det(j_k - \e\II) = 0$. We get a secular equation:
+\begin{align*}
+    (\e_0 - \e)^2 - (te^{ik} + t'e^{-ik})(te^{-ik} + t'e^{ik}) = 0
+\end{align*}
+When we solve the quadratic equation for $\e$, we find:
+\begin{equation}
+    \e = \e_0 \pm \sqrt{t^2 + t'^2 + 2tt'\cos(2k)}
+\end{equation}
+so the band structure will be composed of two bands.
+
+Now, suppose that each atom in this dimerized chain donates exactly one electron. Do we have a metal or insulator? Each unit cell has two atoms. So, if each atom contributes one electron, the bottom band is completely filled (with $N$ electrons) and the top band is completely unfilled. So we have an insulator.
+
+Another question - what happens if the atoms we make them now identical? The gap closes - but this is something for the reader to think about. This ends the discussion of the tight binding model, and we do other things starting monday.
