@@ -123,9 +123,10 @@ On the face of it, it seems like all of the $N$ states would be filled with elec
 
 \begin{figure}[htbp]
     \centering
+    \includegraphics[scale=0.7]{Images/fig-halffilledsquarelattice.pdf}
     
-    \caption{<caption>}
-    \label{<label>}
+    \caption{If each atom contributes one electron, the band is half filled, corresponding to all of the states inside of the diamond (shaded in red). Thus the fermi energy falls within the band and the material will be a metal.}
+    \label{fig-halffilledsquarelattice}
 \end{figure}
 
 \subsubsection{Effective Mass}
@@ -152,9 +153,10 @@ The group velocity is given by:
 
 \begin{figure}[htbp]
     \centering
+    \includegraphics[scale=0.6]{Images/fig-squarelatticegroupvelocity.pdf}
     
-    \caption{<caption>}
-    \label{<label>}
+    \caption{Group velocity of electrons for the tight-binding square lattice, as a function of $k_x$. Near $\v{k} = 0$ the electrons behave as free particles with positive effective mass $m^*$, and the group velocity is aligned with the change in momentum (red) as would be expected for a free particle. Near $k_x = \frac{\pi}{a}$, the electrons have negative effective mass, and the group velocity is opposite to the change in momentum (green).}
+    \label{fig-squarelatticegroupvelocity}
 \end{figure}
 
 Near $\v{k} = 0$, we have $\v{v}_\v{k} \approx \frac{2t_1a^2}{\hbar}\v{k}$. This is as expected for a free particle of mass $m^*$. Near $k_x = \frac{\pi}{a}$, we have $\v{v}_\v{k} = -\frac{2ta^2}{\hbar}\delta k_x$. This is very odd. The velocity is opposite to the change in momentum. This is however consistent with the effective mass being negative.
@@ -166,9 +168,10 @@ Another point - this shows why it is important to distinguish between momentum a
 \subsection{Example - Lattice with a Basis (Dimerized chain)}
 \begin{figure}[htbp]
     \centering
+    \includegraphics[scale=0.5]{Images/fig-dimerizedchain.pdf}
     
-    \caption{<caption>}
-    \label{<label>}
+    \caption{Cartoon of dimerized tight-binding chain, with alternating bond strengths $t/t'$.}
+    \label{fig-dimerizedchain}
 \end{figure}
 
 Our unit cell now contains two atoms, and is of length $2a$. Every atom in the chain can be labelled by the position of the unit cell and with $1/2$. We therefore write the Hamiltonian in second quantization notation as:
@@ -200,6 +203,14 @@ When we solve the quadratic equation for $\e$, we find:
     \e = \e_0 \pm \sqrt{t^2 + t'^2 + 2tt'\cos(2k)}
 \end{equation}
 so the band structure will be composed of two bands.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.6]{Images/fig-dimerizedchainenergy.pdf}
+    
+    \caption{Energy as a function of $k$ for the dimerized tight-binding chain. The band structure is composed of two bands.}
+    \label{fig-dimerizedchainenergy}
+\end{figure}
 
 Now, suppose that each atom in this dimerized chain donates exactly one electron. Do we have a metal or insulator? Each unit cell has two atoms. So, if each atom contributes one electron, the bottom band is completely filled (with $N$ electrons) and the top band is completely unfilled. So we have an insulator.
 
