@@ -1,196 +1,123 @@
-\section{Magnons}
+\section{Electrons in a Periodic Potential: Band Theory of Solids}
 
-Magnons occur as excitations in spin Hamiltonians describing magnetic systems.
+\subsection{Review: Bloch's Theorem}
+See A\&M Ch. 8 for proof(s) and extended discussion.
 
-\subsection{The Heisenberg Model}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[]{Images/fig-FMAFMHeisenbergchain.pdf}
-    \caption{Cartoon depiction of the 1-D Heisenberg chain. For $J > 0$ we have a ferromagnet with aligned spins. For $J < 0$ we have an antiferromagnet with alternating spins. Nearest neighbour spins are coupled, and there is an external magnetic field that affects each spin.}
-    \label{fig-FMAFMHeisenbergchain}
-\end{figure}
-
-Here, we will discuss the simplest such Hamiltonian describing a magnetic system, the Heisenberg model. It is written as:
-\begin{equation}
-    H = -J\sum_{j, \delta}\v{S}_j \cdot \v{S}_{j+\delta} - 2B\sum_j S_j^z
-\end{equation}
-Where the first term represents the coupling between spins, parameterized by a coupling constant $J$ (where $J > 0$ gives rise to a ferromagnet and $J < 0$ to an antiferromagnet), and the second term represents the contribution from an external magnetic field with strength $B$. Note that this Hamiltonian is completely invariant under the choice of $z$-axis; more formally, it is invariant under $SU(2)$ rotations.
-
-Note that $\v{S}_j = (S_j^x, S_j^y, S_j^z)$ is a spin operator at site $j$ that obeys:
-\begin{equation}\label{eq-spinalgebra}
-    [S^\alpha_i, S^\beta_j] = i\delta_{ij}\e^{\alpha\beta\lambda}S^\lambda_j
-\end{equation}
-The second property is that $\v{S}_j \cdot \v{S}_j$ has eigenvalues $s(s+1)$ where $s = \frac{1}{2},1,\frac{3}{2},\ldots$. Note that despite its simple form, the Heisenberg Hamiltonian is generally not solvable; it is only analytically solvable (in a difficult method; Bethe ansatz) in 1D and treatable via approximate methods in higher dimensions. In our class, we will solve the 1D chain approximately
-
-\subsection{Magnon Variables}
-We will proceed with the approximate solve by transforming into ``magnon variables'' using the Holstein-Primakoff transformation. Recall the raising/lowering operators:
+\textbf{Theorem (Bloch).} Consider the eigenstates $\psi$ of the one-electron Hamiltonian:
 \begin{align*}
-    S_i^\pm = S_i^x \pm i S_j^y
+    H = \frac{\hbar^2\nabla^2}{2m} + U(\v{r})
 \end{align*}
-In Holstein-Primakoff, these operators are expressed using bosonic operators:
-\begin{equation}\label{eq-HPtransSplusminus}
-    \begin{split}
-        S_j^+ &= \sqrt{2S}(1 - n_j/2s)^{1/2}a_j
-        \\ S_j^- &= \sqrt{2S}a_j^\dag(1-n_j/2s)^{1/2}
-    \end{split}
+where $U(\v{r} + \v{R}) = U(\v{r})$ for all $\v{R}$ in the Bravais lattice. These eigenstates can be chosen to have the form:
+\begin{equation}\label{eq-Blocheigenstates}
+    \boxed{\psi_{nk}(\v{r}) = e^{i\v{k}\cdot \v{r}}\mu_{nk}(\v{r})}
+\end{equation}
+where:
+\begin{equation}\label{eq-Blocheigenstatesperiodic}
+    \mu_{nk}(\v{r} + \v{R}) = \mu_{nu}(\v{r})
 \end{equation} 
-with $[a_j, a_k^\dag] = \delta_{jk}$ and $n_j = a^\dag_j a_j$ the number operator. This seems like a strange, nonlinear transformation, but in fact is necessary to satisfy the SU(2) algebra. Raising/lowering operators allow for raising/lowering the states to infinity, but spins have a finite number of states. For certain eigenvalues, $n_j = 2s$ and so we get zero, i.e. we cannot raise the spin state beyond its maximal value. We have $S^+, S^-$, and to finish the set we have:
-\begin{equation}\label{eq-HPtransSz}
-    S_z = s(s-1) - (S^x)^2 - (S^y)^2 = s(s-1) - \frac{1}{2}(S^+S^- + S^-S^+) = S - a_j^\dag a_j
+
+The interesting part of this statement is that even though the Haniltonian has a full symmetry under translation by $+ \v{R}$. The eigenstates do not; there is a part that possesses the symmetry $\mu_{nk}(\v{r})$ and a part that does not, $e^{i\v{k} \cdot \v{r}}$ which is translation invariant. This should not be totally unexpected; for example the QHO is symmetric under inversion, but the wavefunctions do not have all of this symmetry ($n$ even is even, $n$ odd is odd).
+
+A remark: Note that Eqs. \eqref{eq-Blocheigenstates} and \eqref{eq-Blocheigenstatesperiodic} imply that:
+\begin{equation}
+    \psi_{nk}(\v{r} + \v{R}) = e^{i\v{k} \cdot \v{R}}\psi_{nk}(\v{r}).
 \end{equation}
 
-Note that the transformations Eqs. \eqref{eq-HPtransSplusminus}, \eqref{eq-HPtransSz} is \emph{exact} in that it satisfies the original spin algebra\footnote{``It is a bitch to work out.'' - Marcel Franz 2022} Eq. \eqref{eq-spinalgebra}. However, it is not very useful as written due to the $\sqrt{}$ in \eqref{eq-HPtransSplusminus}. However, it is useful when we study excited states close to the ordered ground state of $H$, where the spins are completely saturated. In this limit, we assume that only a small number of spins deviate from their perfect arrangement, that is:
-\begin{equation}
-    s - \avg{S_j^z} = \avg{a_j^\dag a_j}
-\end{equation}
-is small, and so:
-\begin{equation}
-    \frac{\avg{n_j}}{s} \ll 1.
-\end{equation}
-We can therefore expand the square roots in Eq. \eqref{eq-HPtransSplusminus}:
-\begin{equation}
-    \begin{split}
-        S^+ &= \sqrt{2S}\left[a_j - \frac{n_j}{4s} + \ldots \right]
-        \\ S^- &= \sqrt{2S}\left[a_j^\dag - a_j^\dag \frac{n_j}{4s} + \ldots \right]
-    \end{split}
-\end{equation}
-and retain only the leading term in this expansion, and write:
-\begin{equation}
-    \v{S}_i\v{S_j} = \frac{1}{2}(S_i^+ S_j^- + S_i^-S_j^+) + S_i^z S_j^z \approx s(a_i^\dag a_j + a_i a_j^\dag + s - n_i - n_j)
-\end{equation}
-from here, the ferromagnetic and anti-ferromagnetic lines diverge, so let's analyze the two cases separately.
+In Eq. \eqref{eq-Blocheigenstates}, $\v{k}$ is known as a crystal momentum and $n$ is the band index. In free space, complete translation invariance implies the conservation of momentum. In a lattice, we have translation invariance w.r.t the Bravais lattice $\v{R}$, only, which implies that momentum is not conserved, but the crystal momentum is conserved.
 
-\subsection{Ferromagnetic Case}
-Here we have $J > 0$, and we write the Hamiltonian as:
-\begin{equation}
-    H = -JS\sum_{\avg{i, j}}\left(a_i^\dag a_j + a_i a_j^\dag + s - n_i - n_j\right) - 2V\sum_j (s - n_j)
-\end{equation}
-where $\avg{i, j}$ means that $i, j$ are nearest neighbour sites. We can solve this by Fourier transforming:
+\subsection{Weak Periodic Potential}
+This is also known as ``nearly free'' electrons in a periodic lattice. We consider the same Hamiltonian $H = \frac{\hbar^2\nabla^2}{2m} + U(\v{r})$ where $U(\v{r})$ is ``weak'', sufficiently weak enough to be treated in perturbation theory. We call $H_0 = \frac{\hbar^2\nabla^2}{2m}$ and $H' = U(\v{r})$.
+
+First, we transform $H$ into second-quantized notation:
 \begin{equation}
     \begin{split}
-        b_k &= \frac{1}{\sqrt{N}}\sum_j e^{i\v{k}\cdot \v{r}_j}a_j
-        \\ b_k^\dag &= \frac{1}{\sqrt{N}}\sum_j e^{-i\v{k}\cdot \v{r}_j}a_j^\dag
+        H_0 &= \sum_{\v{k}, \sigma} \e_\v{k}c^\dag_{\v{k}\sigma}c_{\v{k}\sigma}, \quad \e_\v{k} = \frac{\hbar^2\v{k}^2}{2m}
+        \\ H' &= \sum_{\v{k}\v{k}'\sigma\sigma'}\bra{\v{k}\sigma}U\ket{\v{k}'\sigma}c_{\v{k}\sigma}^\dag c_{\v{k}'\sigma'}
     \end{split}
 \end{equation}
-The momentum-space $H$ assumes the form:
+where we note that as usual we work in the plane wave basis $\psi_\v{k} = \frac{1}{\sqrt{V}}e^{i\v{k} \cdot \v{r}}$, and so:
 \begin{equation}
-    H = -JNzs^2 - 2BNs + \mathcal{H}_0 + \mathcal{H}_1
+    \sum_{\v{k}\v{k}'\sigma\sigma'}\bra{\v{k}\sigma}U\ket{\v{k}'\sigma} = \frac{1}{V}\delta_{\sigma\sigma'}\int d^3 r e^{-i\v{r}\cdot(\v{k} - \v{k}')}U(\v{r})
 \end{equation}
-where $z$ denotes the coordination number (the number of nearest neighbours) and:
+Note that due to its periodic property, $U$ can be written as:
 \begin{equation}
-    \mathcal{H}_0 = \sum_k \left(2Jzs(1 - \gamma_k) + 2B\right)b_k^\dag b_k
+    U(\v{r}) = \sum_{\v{G}}e^{i\v{r} \cdot \v{G}}U_\v{G}
 \end{equation}
-with $\gamma_k = \frac{1}{z}\sum_{\gv{\delta}}e^{i\v{k}\cdot\gv{\delta}}$. If we had a two-dimensional square lattice, then the $\gv{\delta}$ vectors would be as follows:
+where $\v{G}$ are reciprocal lattice vectors satisfying $e^{i\v{G} \cdot \v{R}} = 1$ for all $\v{R}$ in the Bravais lattice (check)! $U_\v{G}$ is the fourier transform of our potential, evaluated at $\v{G}$.
+
+We further assume that $U_{\v{G} = 0} = 0$, which only redefines the overall energy zero. We can therefore write:
+\begin{equation}
+    \bra{\v{k}\sigma}U\ket{\v{k}'\sigma'} = \frac{\delta_{\sigma\sigma'}}{V} \int d^3r \sum_\v{G} U_\v{G} e^{-i\v{r}\cdot(\v{k} - \v{k'} - \v{G})} = \delta_{\sigma\sigma'}\sum_\v{G}U_\v{G}\delta_{\v{k} - \v{k}', \v{G}}
+\end{equation}
+when the dust settles, we find:
+\begin{equation}
+    H' = \sum_{\v{k}\v{G}\sigma} U_\v{G} c^\dag_{\v{k} + \v{G}\sigma}c_{\v{k}\sigma}
+\end{equation}
+which is a very suggestive rewrite; for each term corresponds to the destruction of an electron with wavevector $\v{k}$ and the creation of an electron with wavevector $\v{k} + \v{G}$. This also explains the conservation of crystal momentum; the electron undergoes scattering processes which changes the momentum from $\v{k}$ to $\v{k} + \v{G}$ (so momentum is not conserved) but the crystal momentum (i.e. momentum up to reciprocal lattice vectors) is. This also connects back to the Bruillion zone; the wavevector $\v{k}$ appearing here can always be confined to the first Bruillion zone.
+
+In the following, we suppress the spin index, and focus on 1D systems for simplicity. So, we have:
+\begin{align*}
+    H_0 = \sum_k \e_k c^\dag_k c_k, \quad H' = \sum_{k, G} U_G c^\dag_{k + G}c_k
+\end{align*}
+we ask how is an electron in an eigenstates $\ket{k} = c^\dag_k \ket{0}$ of $H_0$ perturbed by $H'$.
+
+\subsubsection{Zeroth-order perturbation theory}
+To start, in zeroth order perturabtion theory, we have:
+\begin{equation}
+    E_k^{(0)} = \e_k
+\end{equation}
+Of course, nothing exciting here...
+
+\subsubsection{First-order perturbation theory}
+We have:
+\begin{equation}
+    E_k^{(1)} = \bra{k}H'\ket{k} = \bra{k}\sum_{q,G} U_G c^\dag_{q + G}c_q\ket{k} = \bra{k}\sum_G U_G c_{k+G}^\dag \ket{0} = \sum_G U_G\braket{k}{k+G} = U_0 = 0.
+\end{equation}
+so the first order contribution is zero.
+
+\subsubsection{Second-order perturbation theory}
+We have:
+\begin{equation}
+    E_k^{(2)} = \sum_{k' \neq k} \frac{\abs{\bra{k}H'\ket{k'}}^2}{\e_{k'} - \e_k}
+\end{equation}
+So we calculate:
+\begin{equation}
+    \bra{k}H'\ket{k'} = \sum_{qG}U_G\bra{k}c^\dag_{q + G}c_q \ket{k'} = \sum_G U_G\bra{k}c^\dag_{k'+G}\ket{0} = \sum_G U_G\braket{k}{k'+G} = \sum_G U_G \delta_{k, k'+G} = 
+\end{equation}
+Therefore:
+\begin{equation}
+    E_k^{(2)} = \sum_{k' \neq k, G, G'}\frac{U_G U_{G'}^* \delta_{k,k'+G}\delta_{k, k'+G'}}{\e_{k'} - \e_k} = \sum_{G \neq 0,G'} \frac{U_G U_{G'}^* \delta_{GG'}}{\e_{k+G} - \e_k} = \sum_{G \neq 0} \frac{\abs{U_G}^2}{\e_{k+G} - \e_k}
+\end{equation}
+
+For small $\abs{U_G}$, this correction is small, EXCEPT when $\abs{\e_{k - G} - \e_k}$ is also small. This occurs at specific values of $\v{k} = \frac{1}{2}\v{G}$ (valid also in 3D). However this is not the final answer; in reality there will not be an infinite correction. What's the catch? When we do perturbation theory as we have, we assume that the energy levels are non-degenerate; but here there is a degeneracy. Hence, at and near $\v{k} = \frac{1}{2}\v{G}$, we must apply degenerate perturbation theory because $\e_{k - G} = \e_k$ and this could be viewed as a degeneracy.
+
+\subsection{Degenerate Perturbation Theory}
+We define two near degenerate states:
+\begin{equation}
+    \ket{1} = \ket{k}, \quad \ket{2} = \ket{k - G_1}
+\end{equation}
+and construct the Hamiltonian matrix in this basis:
+\begin{equation}
+    H = \m{\bra{1}H\ket{1} & \bra{1}H\ket{2} \\ \bra{2}H\ket{1} & \bra{2}H\ket{2}} = \m{\e_k & U_G \\ U_G^* & \e_{k-G}}
+\end{equation}
+The perturbed energies are given by eigenvalues:
+\begin{equation}
+    \det\m{\e_k - E & U_G \\ U_G^* & \e_{k-G} - E} = 0 \implies (\e_k - E)(\e_{k-G} - E) - \abs{U_G}^2 = 0
+\end{equation}
+so then:
+\begin{equation}
+    E_k = \frac{1}{2}\left(\e_k + \e_{k-G}\right) \pm \sqrt{\frac{1}{4}\left(\e_k - \e_{k-G}\right)^2 + \abs{U_G}^2}
+\end{equation}
+Note for $k = \frac{1}{2}G$, i.e. the degeneracy point, this implies:
+\begin{equation}
+    E_k = \e_k \pm \abs{U_G}.
+\end{equation}
+So we have an energy gap! This quantifies the distinction of metals and insulators, using quantum mechanics; we will go further into this discussion next class.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[]{Images/fig-2dsquarelatticedeltas.pdf}
-   
-    \caption{The four $\gv{\delta}$ vectors for the 2D square lattice. Each atom has neighbours at $\delta = \pm \xhat$, $\delta = \pm \yhat$.}
-    \label{fig-2dsquarelatticedeltas}
-\end{figure}
-
-Note that this form of $\mathcal{H}_0$ is valid for lattices with an inversion center which implies $\gamma_\v{k} = \gamma_{-\v{k}}$. Without this condition the form of $\mathcal{H}_0$ would be more complicated. One way to think about this is a lattice has an inversion center if for every lattice site, there is both a $\gv{\delta}$ and $-\gv{\delta}$ nearest neighbour. This would not be the case (e.g.) for a honeycomb lattice.
-
-$\mathcal{H}_1$ contains higher order terms in $b_k, b_k^\dag$ and represents magnon interactions.
-
-The situation is analogous to phonons; we made a harmonic approximation, which gave us a nice quadratic Hamiltonian. The higher order terms represented interactions of the phonons. The mechanics is different here but the idea is the same; we have a ``nice'' quadratic Hamiltonian $\mathcal{H}_0$ and then the higher order terms in $\mathcal{H}_1$ representing magnon interactions. Similar to phonons where the harmonic approx was sufficient to describe lattice vibrations but not expansions, we will find that thermodynamics is described well by the lower-order expansion, but (e.g.) thermal conduction will require the higher order terms to analyze.
-
-We write things suggestively as:
-\begin{equation}
-    \begin{split}
-        \mathcal{H}_0 &= \sum_k \omega_k n_k
-        \\ \omega_k &= 2Jsz(1 - \gamma_k) + 2B
-    \end{split}
-\end{equation}
-where $\omega_k$ is the magnon spectrum. This tells us about the low energy excitations. 
-
-\subsection{An Example: Cubic Lattice in 3D}
-In this example, we have:
-\begin{equation}
-    \gv{\delta} = \pm a\xhat, \pm a\yhat, \pm a\zhat.
-\end{equation}
-So then:
-\begin{align*}
-    z(1-\gamma_\v{k}) = 6 - \sum_{\gv{\delta}}e^{i\v{k} \cdot \gv{\delta}} = 2(3 - \cos(ak_x) - \cos(ak_y) - \cos(ak_z))
-\end{align*}
-We are interested in the low-temperature/energy and hence long wavelength excitations, so $ka \ll 1$ and so we can expand $\cos(k_ia) \approx 1- \frac{1}{2}k_i^2 a^2$. We then find:
-\begin{equation}
-    \omega_k \approx 2B + 2Js(ka)^2
-\end{equation}
-note that the same result holds for FCC and BCC lattices. At zero magnetic field, the magnons exhibit particle like spectra:
-\begin{equation}
-    \omega_k = \frac{k^2}{2m^*}, \quad m^* = \frac{1}{4Jsa}
-\end{equation}
-for conventional ferromagnets, it is found that $m^* \approx 10m_e$.
-
-To find the magnon heat capacity, we take $\omega_k = Dk^2$ with $D = 2sJa^2$ and calculate the internal energy $U(T)$:
-\begin{equation}
-    \begin{split}
-        U(T) = \sum_\v{k}\omega_\v{k}\avg{n_\v{k}}_T &= \sum_\v{k}\frac{\omega_\v{k}}{e^{\beta\omega_\v{k}} - 1}
-        \\ &= \frac{1}{(2\pi)^3}\int_{\abs{\v{k}} < k_{max}} d^3k \frac{Dk^2}{e^{\beta Dk^2} - 1}
-        \\ &= \frac{(k_B T)^{5/2}}{4\pi^2 D^{3/2}}\int_0^{x_m}dx \frac{x^{3/2}}{e^x - 1} \quad x = \beta Dk^2, x_m = D\beta k^2_{max}
-        \\ &= \frac{0.45}{\pi^2}\frac{(k_B T)^{5/2}}{D^{3/2}}
-    \end{split}
-\end{equation}
-The integral is dimensionless, so the temperature dependence is entirely in the prefactor. In the last line we have taken the $x_m \to \infty$ to carry out the integral, an approximation that is valid at low temperatures. From this we easily obtain the heat capacity:
-\begin{equation}
-    C_V = \dod{U}{T} = 0.113k_B(k_B T/D)^{3/2}
-\end{equation}
-we have another different temperature dependence of the heat capacity! For electrons, $C_V \sim T$, for phonons, $C_V \sim T^3$, and for magnonons, we have $C_V \sim T^{3/2}$. This suggests that if we have an insulating (i.e. no electronic contribution) antiferromagnet, to observe $C_V$ we include a phonon contribution $\sim bT^3$ which means that:
-\begin{align*}
-    C_V^{tot} = cT^{3/2} + bT^3
-\end{align*}
-we can then plot $C_V^{tot}/T^{3/2}$ vs. $T^{3/2}$, which gives us a straight line with intercept $c$ as:
-\begin{align*}
-    \frac{C_V^{tot}}{T^{3/2}} = c + bT^{3/2}.
-\end{align*}
-
-\textbf{Reading Assignment:} Antiferromagnetic magnons - see pages 58-62 in the handout (Kittel's \emph{Quantum Theory of Solids}).
-
-\subsection{Magnetization Reversal}
-We expect the total magnetization:
-\begin{align*}
-    M_s = 2\mu_0 \sum_j \avg{S_j^z}
-\end{align*}
-to decrease as $T$ is raised and more magnons are thermally excited. We can calculate this by going into magnon variables:
-\begin{equation}
-    M_S(T) = 2\mu_0 \left(NS - \sum_\v{k}\avg{b^\dag_\v{k}b_\v{k}}\right)
-\end{equation}
-We are interested in $\Delta M(T) = M_S(0) - M_S(T)$:
-\begin{equation}
-    \Delta M(T) = 2 \mu_0\sum_\v{k}\avg{\hat{n}_\v{k}} = \frac{2\mu_0 V}{(2\pi)^d}\int_0^{k_{max}} d^dk \frac{1}{e^{\beta Dk^2} - 1}
-\end{equation}
-Let's calculate the integral. Note that $k_{max}$ is the momentum cutoff analogous to the Debye momentum for phonons. The integrand only depends on the magnitude of $\v{k}$, so we can carry out the angular integrals to give us the surface $S_d$ of the $d$-dimensional unit sphere (e.g. $S_3 = 4\pi, S_2 = 2\pi$):
-\begin{align*}
-    \Delta M(T) = S_d V \int_0^{k_{\text{max}}} dk k^{d-1}\frac{1}{e^{\beta Dk^2} - 1}
-\end{align*} 
-substituing $x = \beta Dk^2$, $dx = 2\beta Dk dk$ we find:
-\begin{equation}
-    \begin{split}
-        \Delta M(T) &= S_D V \int_0^{x_m} \frac{dx}{\beta D}\left(\frac{x}{\beta D}\right)^{\frac{d-2}{2}}\frac{1}{e^x - 1}
-        \\ &= S_D V \left(\frac{k_B T}{D}\right)^{d/2}\int_0^{x_m}\frac{x^{(d-2)/2}}{e^x - 1}dx
-    \end{split}
-\end{equation}
-The behaviour near $x = 0$ is interesting. Because $e^x \- 1 \sim x$ for $x \ll 1$, the integral diverges at the lower bound when $d \leq 2$. This implies that thermal fluctuations tend to destabilize ferromagnetic order in low dimensions (that is to say, $d \leq 2$). This of course is an approximate treatment, but you can analyze this much more carefully and this is indeed a correct result. Strictly speaking, in 2D ferromagnetic order only exists at zero temperature, and as soon as you raise the temperature above zero, you get long wavelength fluctuations and the average magnetization is immediately zero. The same is true of 1 dimension. In three dimensions this is not a problem, as the integral is not convergent. At $T = 0$ we have a perfectly ordered ferromagnetic, and as we increase the temperature the magnetization decreases, as $\Delta M(T) \sim T^{3/2}$. This is experimentally observed.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[scale=0.7]{Images/fig-magnetizationvstemperature.pdf}
+    \includegraphics[scale=0.7]{Images/fig-energyvskgap.pdf}
     
-    \caption{Plot of the total magnetization $M_S(T)$ as a function of temperature $T$. The deviation from total magnetization goes as $T^{3/2}$, and the total magnetization goes to zero at the critical (Curie) temperature $T_c$.}
-    \label{fig-magnetizationvstemperature}
+    \caption{Plot of the energy $\e_k$ and $\e_{k-G}$ as a function of $k$. At $k = \frac{1}{2}G$ the two energy functions coincide. At and near this point, non-degenerate perturbation theory breaks down. A more careful treatment using degenerate perturbation theory shows that there are two energy levels, separated by a gap $2\abs{U_G}$.}
+    \label{fig-energyvskgap}
 \end{figure}
-
-A concrete example that you may try at home: Fridge magnets lose their magnetic properties when heated up. Interestingly, when you cool them back down, you find that the magnetization is still zero. This is because the rise of domains within the magnet when cooled past the critical temperature, which makes the net average magnetization zero. It can however be re-magnetized in the presence of a second magnet.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[]{Images/fig-magnetdomains.pdf}
-
-    \caption{Cartoon sketch of the magnetic domains that appear in a bar magnet when cooling it back down from the critical temperature. As a result, the total magnetization is zero.}
-    \label{fig-magnetdomains.pdf}
-\end{figure}
-
-% Midterm Cutoff
