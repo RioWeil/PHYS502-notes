@@ -1,0 +1,133 @@
+\section{Density Functional Theory}
+
+\subsection{Motivation}
+A brief recap - at the beginning of the term we discussed the Jellium model, where we replaced the ionic lattice with a uniform positive background, and we then calculated the energy of electrons amongst other properties. We then began to discuss electrons moving in a periodic potential of the lattice, which lead to band structure theory - but in this approximation we neglected interactions between the electrons. In a real solid that we have both a periodic lattice and electronic interactions. Trying to combine the two leads to an intractable problem, as as soon as we abandon the independent electron approximation, suddenly the wavefunction becomes a function of $10^{23}$ variables, and there is no good method to get this wavefunction in a system that does not have full translational invariance.
+
+DFT is then the only practical way to perform calculations for electrons structure in real solids. It was developed bhy Walter Kohn in the 60s. We briefly survey the topic in a single class today, but there exist entire books written on the topic and it is a technique well-used in research today.
+
+\subsection{The Hohenberg-Kohn Theorem}
+
+QFT is grounded in the Hohenberg-Kohn theorem, which applies to the family of electron Hamiltonians of the form:
+\begin{equation}\label{eq-DFTHamiltonian}
+    \hat{H} = \sum_{\v{k}, \sigma} \frac{\hbar\v{k}^2}{2m}c_{\v{k}\sigma}^\dag c_{\v{k}\sigma} + \sum_{\v{k}, \v{q}, \sigma}U(\v{q})c^\dag_{\v{k} + \v{q}, \sigma}c_{\v{k}\sigma} + \frac{1}{2}\sum_{\v{k}\v{p}\v{q}\sigma\sigma'}V_\v{q}c^\dag_{\v{k}-\v{q}\sigma}c^\dag_{\v{p}+\v{q}\sigma'}c_{\v{p}\sigma'}c_{\v{k}\sigma}
+\end{equation}
+where the first term is the electron kinetic energy which we call $\hat{T}$, the second term is the potential term $\hat{U}$, and the third term is the Coulomb interactions $\hat{V}$. 
+
+The Hohenberg-Kohn theorem says that the expectation value of any operator $\hat{O}$ is a unique functional of the ground-state electron density $n_0(\v{r})$. We don't need the full many-body wavefunction of the system; we only need the ground state electron density. Quite incredible! From this theorem unfolds the apparatus of DFT. the simplification is that the density is a function only of three spatial variables $\v{r} = (r_x, r_y, r_z)$. We only need to couch calcualtions in terms of 3 variables, not $10^{23}$!
+
+Comment: There do exist extensions of the theorem to thermal ensembles at finite temperature, though the HK theorem in the above form only addresses the ground state.
+
+A few other remarks. The $\hat{T}, \hat{V}$ pieces of Eq. \eqref{eq-DFTHamiltonian} are universal across solids, and $\hat{U}$ is the only part that differs between solids. In principle, given $\hat{U}$ we can calcualte the electron density $n_0(\v{r})$. 
+
+The HK theorem states that the mapping:
+\begin{equation}
+    U(\v{r}) \leftrightarrow n_0(\v{r})
+\end{equation}
+is actually reversible. Because from $U(\v{r})$ we can in principle obtain the full many-body wavefunction $\psi(\v{r}_1, \ldots, \v{r}_n)$ (and thus the expectation value $\avg{\hat{O}}$) this implies that $\avg{\hat{O}}$ is uniquely determined by $n_0(\v{r})$. Also note that everything we will say is true of non-degenerate ground states (degeneracy can add complications to these uniqueness statements), though we can extend the results to the case with degeneracy.
+
+\subsection{Proof of the Hohenberg-Kohn Theorem}
+
+\subsubsection{Part 1}
+We first show that two potentials $U(\v{r})$ and $U'(\v{r})$ that differ by more than a trivial constant, necessarily lead to different ground states $\psi_0 \neq \psi_0'$. We have:
+\begin{equation}
+    \begin{split}
+        &(\hat{T} + \hat{V} + \hat{U})\psi_0 = \e_0\psi_0
+        \\ &(\hat{T} + \hat{V} + \hat{U}')\psi_0' = \e_0'\psi_0'
+    \end{split}
+\end{equation}
+We proceed by proof by contradiction. Assume $\psi_0 = \psi_0'$, then subtracting the second equation from the first:
+\begin{equation}
+    (\hat{U} - \hat{U}')\psi_- = (\e_0 - \e_0')\psi_0
+\end{equation}
+So $\hat{U}, \hat{U}'$ only differ by a trivial constant, contradicting our assertion that they differ by more than a trivial constant. \qed
+
+\subsubsection{Part 2}
+It is also clear that two different densities $n_0(\v{r}) \neq n_0'(\v{r})$ require different potentials - this follows from the uniqueness of solutions to the Schrodinger equation (in the non-degenerate case). 
+
+It therefore follows that the ground state wavefunction is uniquely specified by the electron density. One can also show that $\psi_0 \neq \psi_0'$ implies $n_0(\v{r}) \neq n_0'(\v{r}')$ which completes the proof. \qed
+
+\subsection{Variational Principle}
+There is an important variational principle associated with the HK theorem. HK applies for expectation values of all operators, so in particular let us pick the Hamiltonian (i.e. the ground state energy):
+\begin{equation}
+    \e[n] = \bra{\psi_0[n]}\hat{T} + \hat{V} + \hat{U}\ket{\psi_0[n]}
+\end{equation}
+where $\e[n]$ is the ground state energy functional, such that $\e_0 = \e[n_0]$ is the true ground state energy. As a refresher, a functional is a mapping from the space of functions to the space of numbers. For example the definite integral over $[0, 1]$ is a functional. We distinguish them by angular brackets, and their arguments are functions. 
+
+It then holds that:
+\begin{equation}
+    \e_0 < \e[n]
+\end{equation}
+for any $n(\v{r}) \neq n_0(\v{r})$. This is nothing more than a restatement of the familiar variational principle of $E_0 \leq \bra{\psi}H\ket{\psi}$. 
+
+
+This variational principle gives the practical machinery for doing DFT calcualtions; the ground state energy and $n_0(\v{r})$ can be found by minimizing this functional. $\e[n]$ is usually written as:
+\begin{equation}
+    \e[n] = F_{HK}[n] + \int d^3rn(\v{r})U(\v{r})
+\end{equation}
+where $F_{HK}[n] = \bra{\psi_0[n]}\hat{T} + \hat{V}\ket{\psi_0[n]}$, which importantly is the same for all systems on the account of universality! $F_{HK}$ has to be determined only once! Of course anything that is this useful is not so easily obtained, and various DFT approaches differ in what they use for the $F_{HK}$ functional. Let us explain the second term - why can it be written as the simple integral? First, we write:
+\begin{align*}
+    n(\v{r}) = \int \set{d^3r} \psi^*(\v{r}_1, \ldots \v{r}_N)\sum_{i=1}^N \delta(\v{r} - \v{r}_i)\psi(\v{r}_1 \ldots \v{r}_N)
+\end{align*}
+Where $\set{d^3r} = d^3r_1\ldots d^3r_N$. Then:
+\begin{equation}
+    \bra{\psi_0}U\ket{\psi_0} = \int \set{d^3r}\psi^*(\v{r}_1, \ldots \v{r}_N)\sum_{i=1}^N U(\v{r}_i)\psi(\v{r}_1, \ldots \v{r}_N) = \int \set{d^3r} d^3r_p \psi^*(\ldots)\sum_i \delta(\v{r}_p - \v{r}_i)U(\v{r}_p)\psi(\ldots)
+\end{equation}
+and separating this into two integrals, and the integral over all wavefunction coordinates gives exactly $n(\v{r})$, giving precisely $ \bra{\psi_0}U\ket{\psi_0} = \int d^3rn(\v{r})U(\v{r})$.
+
+\subsection{The Kohn-Sham Formulation}
+This formulation allows for practical applications of the HK theorem. The idea - one imagines that there is a non-interacting reference system $\hat{H}_S = \hat{T} + \hat{U}_S$ whose potential $\hat{U}_S$ is chosen such that the ground state density is precisely the same as the actual interacting system $\hat{H} = \hat{T} + \hat{V} + \hat{U}$ we are interested in. Because computations of $\psi_0$ and $n_0$ are ``easy'' in a non-interacting system $\hat{H}_S$ (as the indepdendent electron approximation can be used), we can then practically implement this whole scheme.
+
+\subsubsection{DFT for the Reference System}
+Similarly for the actual system, we have a ground state energy function:
+\begin{equation}
+    \e_S[n] = T_s[n] + \int d^3rU_s(\v{r})n(\v{r})
+\end{equation}
+where here $n_s(\v{r})$ can be easily obtained from the wavefunctions:
+\begin{equation}\label{eq-nrDFT}
+    n_s(\v{r}) = \sum_{i=1}^N \abs{\phi_i(\v{r})}^2
+\end{equation}
+and we solve for the $\phi_i$s by solving the Schrodinger equation:
+\begin{equation}\label{eq-SEDFT}
+    \left[-\frac{\hbar^2\nabla^2}{2m} + U_S(\v{r})\right]\phi_i(\v{r}) = \e_i\phi_i(\v{r})
+\end{equation}
+The hard part is we do not know what $U_S$ is - we need to find its form. We write down again the ground state energy functional for the full system, but in a peculiar way:
+\begin{equation}
+    \begin{split}
+        \e[n] &= T[n] + V[n] + \int d^3rn(\v{r})U(\v{r}) \\ &= T_S[n] + \left[T[n] - T_S[n] - \frac{e^2}{2}\int d^3r d^3r' \frac{n(\v{r})n(\v{r}')}{\abs{\v{r} - \v{r}'}}\right] + \frac{e}{2}\int d^3rd^3r' \frac{n(\v{r})n(\v{r}')}{\abs{\v{r} - \v{r}'}} + \int d^3rU(\v{r})n(\v{r})
+    \end{split}
+\end{equation}
+Where the term in brackets is the exchange-correlation functional:
+\begin{equation}
+    \e_{xc}[n] = F_{HK}[n] - \frac{e^2}{2}\int d^3rd^3r'\frac{n(\v{r})n(\v{r}')}{\abs{\v{r} - \v{r}'}} - T_S[n]
+\end{equation}
+We minimize $\e[n]$ by variational calculus:
+\begin{equation}\label{eq-fullEminimization}
+    0 = \frac{\delta \e[n]}{\delta n(\v{r})} = \frac{\delta T_s[n]}{\delta n(\v{r})} + e^2 \int d^3r'\frac{n(\v{r}')}{\abs{\v{r} - \v{r}'}} + U(\v{r}) + v_{xc}[n(\v{r})]
+\end{equation}
+where $v_{xc}[n(\v{r})] = \frac{\delta \e_{xc}[n]}{\delta n(\v{r})}$ is the exchange-correlation potential. We minimize the reference system:
+\begin{equation}
+    0 = \frac{\delta \e_n[n]}{\delta n(\v{r})} = \frac{\delta T_s}{n(\v{r})} + U_S(\v{r})
+\end{equation}
+and then subtracting from the minimization of the full system in Eq. \eqref{eq-fullEminimization}:
+\begin{equation}\label{eq-Us}
+    U_s(\v{r}) = U(\v{r}) + e^2\int d^3r'\frac{n(\v{r}')}{\abs{\v{r} - \v{r}'}} + v_{xc}(\v{r})
+\end{equation}
+This is the important result! In practical calculations we can therefore implement Kohn-Sham by following the three-step program:
+\begin{enumerate}
+    \item Choose an initial trial density $n(\v{r})$. Substitute in Eq. \eqref{eq-Us} and calculate $U_S(\v{r})$. 
+    \item Solve the SE in Eq. \eqref{eq-SEDFT} for $\phi_i(\v{r})$ and find the new density $n(\v{r})$ from Eq. \eqref{eq-nrDFT}
+    \item Iterate until $n(\v{r})$ stops changing.
+\end{enumerate}
+The enormous advantage of this procedure is that at no point in this calculation are we ever forced to calculate the full many-body wavefunction. Of course, it comes at a cost - we have hidden all of the interaction physics inside of the exchange-correlation potential $v_{xc}$. Despite this - DFT remains as one of the most successful techniques in CM physics today, and is the basis for much of our understanding of solids.
+
+\subsubsection{Remarks}
+\begin{enumerate}[(i)]
+    \item The above procedure is implemented in various software packages (Wien 2K, Quantum Espresso...)
+    \item These differ mainly in the form of $v_{xc}$. 
+    \item Packages provide ``band structures'', i.e. energy eigenvalues $\e_i(\v{k})$ of Eq. \eqref{eq-SEDFT}. If we construct the full many-body wavefunctions from the obtained observable expectation values, we often obtain very good approximations to the true systems - and systems for which DFT fail are unusual/interesting.
+\end{enumerate}
+
+\subsection{Choices for the Exchange-Correlation Potential}
+See Lecture Notes.
+
+Next time, we will start discussing the semiclassical theory of conduction in metals. Please read A\&M p214-218 in preparation.
