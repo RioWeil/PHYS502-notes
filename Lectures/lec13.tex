@@ -125,9 +125,23 @@ The enormous advantage of this procedure is that at no point in this calculation
     \item The above procedure is implemented in various software packages (Wien 2K, Quantum Espresso...)
     \item These differ mainly in the form of $v_{xc}$. 
     \item Packages provide ``band structures'', i.e. energy eigenvalues $\e_i(\v{k})$ of Eq. \eqref{eq-SEDFT}. If we construct the full many-body wavefunctions from the obtained observable expectation values, we often obtain very good approximations to the true systems - and systems for which DFT fail are unusual/interesting.
+    \item There are many useful generalizations of DFT, such as TD-DFT which adds time-dependence, CDFT (current DFT) which includes an external magnetic field, and EDFT (ensemble DFT) which deals with degeneracies.
 \end{enumerate}
 
 \subsection{Choices for the Exchange-Correlation Potential}
-See Lecture Notes.
+Many sophisticated approximations for $\e_{xc}[n]$ have been developed and implemented over the years. 
+
+The simplest such is the local density approximation, which assumes that $\e_{xc}$ only depends on the local density:
+\begin{equation}
+    \e_{xc}[n] = \int d^3r n(\v{r})\e_{xc}(n(\v{r}))
+\end{equation}
+where $\e_{xc}(n)$ is the exchange-correlation energy (per particle) of a homogenous electron gas of density $n$ (Jellium):
+\begin{equation}
+    \e_{xc}(n) = \frac{e^2}{a_0r_s^2}(br_s + cr_s\log r_s + \ldots).
+\end{equation}
+Other popular approximations include LSDA (low spin density approximation) and GGA, the ``generalized gradient approximation'':
+\begin{equation}
+    \e_{xc}[n] = \int d^3r[g_{00}(n) + g_{22}(n)(\nabla n)^2 + g_{42}(n)(\nabla^2 n)^2 + \ldots]
+\end{equation}
 
 Next time, we will start discussing the semiclassical theory of conduction in metals. Please read A\&M p214-218 in preparation.
