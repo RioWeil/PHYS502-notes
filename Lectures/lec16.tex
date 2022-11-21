@@ -1,0 +1,136 @@
+\section{Semiclassical Theory of Conduction Continued}
+
+% Logistics - HW4 last assignment, HW5 on superconductivity good to go over before exam, but not collected.
+\subsection{Solving for Non-Equilibrium Distribution}
+We have:
+\begin{equation}
+    g(t) = g^0(t) = \int_{-\infty}^t dt' P(t, t')\left[\left(-\dpd{f}{\e}\right)\v{v} \cdot \left(-e\v{E} - \nabla \mu - \frac{\e - \mu}{T}\nabla T\right)\right]
+\end{equation}
+\begin{equation}
+    P(t, t') = \exp(-\int_{t'}^t \frac{d\bar{t}}{\tau(\bar{t})})
+\end{equation}
+\begin{equation}
+    \dot{\v{r}} = \v{v}, \quad \hbar \dot{\v{k}} = -e\left[\v{E} + \frac{1}{c}(\v{v} \times \v{B})\right]
+\end{equation}
+But in this form solving for the non-equilibrium distribution is only possible numerically. However, there are three simplifying assumptions that allow for us to get a closed form:
+\begin{enumerate}
+    \item Weak $\v{E}$-field and $\nabla T$. Usually this is a good approximation - most of the time it is impossible to apply a sufficiently strong $\v{E}$ field or a thermal gradient such that these terms matter significantly.
+    \item Spatially uniform $\v{E}$ and $\nabla T$. This again is a good approximation; $\v{E}$ will likely be uniform on the length-scale of electron collisions, as will thermal gradients. Under these assumptions, the energy (which is the only place where $t'$ enters) only depends on the magnetic field - however the magnetic field conservs energy, so $t'$ enters only in the first piece of the integral!
+    \item The relaxation time depends $\v{k}$ only through $\e_n(\v{k})$. This is the energy-dependent relaxation approximation. It is the hardest approximation to justify, and there isn't a deep reason for it beyond making the calculations simple. This implies that $P(t, t') = e^{-(t-t')/\tau_n(\v{k})}$.
+\end{enumerate}
+
+With these assumptions, the non-equilibrium distribution takes the form (note: there is no more spatial dependence/translationally invariant situation here!):
+\begin{equation}
+    g(\v{k}, t) = g^0(\v{k}) + \int_{-\infty}^t dt' e^{-(t-t')/\tau(\e(\v{k}))}\left[\left(-\dpd{f}{\e}\right) \v{v}(\v{k}(t')) \cdot [-e\v{E}(t') - \nabla \mu(t') - \frac{\e(\v{k}) - \mu}{T}\nabla T(t')]\right]
+\end{equation}
+
+\subsection{DC electrical conductivity}
+We consider $\v{B} = \v{0}, \nabla T = \v{0}, \v{E} = E_0\hat{\v{n}} \neq 0$. In this scenario, $\v{v}$ is a constat, $\v{E}$ is a constant, and so we can take things out of the integral and perform the remaining integral, which is trivial:
+\begin{equation}
+    g(\v{k}) = g^0(\v{k}) - e\v{E}\cdot \v{v}(\v{k})\tau(\e(\v{k}))\left(-\dpd{f}{\e}\right)
+\end{equation}
+We can obtain the electrical current as:
+\begin{equation}
+    \v{j} = -e \int \frac{d^3k}{4\pi^3} \v{v}(\v{k})g(\v{k}) = \hat{\sigma}\v{E}
+\end{equation}
+Note the $g^0$ term will give us no contribution as we have no current at equilibrium. $\hat{\sigma}$ is the \emph{conductivity tensor}. This is the generalized Ohm's law. We can get it by summing the per-band conductivity tensors (here expressed in their Cartesian components):
+\begin{equation}
+    \hat{\sigma} = \sum_n \hat{\sigma}^{(n)}, \quad \hat{\sigma}^{(n)}_{\mu\nu} = e^2 \int \frac{d^3k}{4\pi^3}\tau_n(\e_n(\v{k}))v_n^\mu (\v{k})v_n^\nu(\v{k})\left(-\dpd{f}{\e}\right)_{\e = \e_n(\v{k})}
+\end{equation}
+Note that $v_n, \p f$ are relatively well-known but $\tau(\e_n(\v{k}))$ is generally not. This is because relaxation can come from many sources. It is hard to theoretically calculate.
+
+Some remarks: 
+\begin{enumerate}[(i)]
+    \item Anisotropy - In general because $\hat{\sigma}$ is a tensor, it is possible to have a scenario where $\v{j}$ is not aligned with $\v{E}$, which can occur when $\hat{\sigma}$ has off-diagonal elements. However, one can show that for free electrons, and for cubic crystals, $\sigma_{\mu\nu} = \sigma_0 \delta_{\mu\nu}$ by symmetry so $\v{j} \parallel \v{E}$. In less symmetric crystals (e.g. orthorhombic) we an see that they are not parallel.
+    \item Filled bands do not contribute to $\hat{\sigma}$ at $T = 0$. Obviously empty bands would contribute nothing, but it is more surprising that a filled band does not contribute either. Formally, we can see it from the $\left(-\dpd{f}{\e}\right)_{\e = \e_n(\v{k})}$ - at $T = 0$ the fermi function is a step function, with the step at $\e_F$, so if we take a derivative, it is just $\delta(\e - \e_F)$. But since we evaluate at $\e = \e_n(\v{k})$ a band energy, the derivative must vanish. You will get to explore this in the HW, where you will study the conduction of a band insulator at finite temperature.
+    \item Equivalence of electron and hole pictures. We consider a situation where the band structure looks as:
+
+    Now, consider:
+    \begin{equation}
+        \v{v}(\e)\left(-\dpd{f}{\e}\right)_{\e = \e_n(\v{k})} = -\frac{1}{\hbar}\dpd{}{\v{k}}f(\e(\v{k}))
+    \end{equation}
+    so:
+    \begin{equation}
+        \hat{\sigma}^n = e^2\tau(\e_F)\int \frac{d^3k}{4\pi^3} \dpd{\v{v}_n(\v{k})}{\v{k}}f(\e(\v{k})) = e^2\tau(\e_F)\int_{\text{occ. levels}} \frac{d^3k}{4\pi^3}M^{-1}(\v{k})
+    \end{equation}
+    where we have used an integration by parts to rewrite $\hat{\sigma}^n$, and are assuming that $T = 0$. Note that $M^{-1}_{\mu\nu}(\v{k}) = \frac{1}{\hbar^2}\frac{\partial^2 \e(\v{k})}{\partial k_\mu \partial k_\nu} = \frac{1}{\hbar}\dpd{v_\mu(\gv{\e})}{k_\nu}$. We can then write:
+    \begin{equation}
+        \hat{\sigma} = e^2 \tau(\e_F)\left[\int_{\text{all states}} - \int_{\text{empty states}}\right]
+    \end{equation}
+    But if we integrate over the entire Brioullin zone, then $\int \frac{d^3k}{4\pi^3}M^{-1}(\v{k}) = 0$ as we integrate over a periodic function. The bottom line is:
+    \begin{equation}
+        \hat{\sigma} = -e^2\tau(\e_f)\int_{\text{empty states}}\frac{d^3k}{4\pi^3}M^{-1}(\v{k})
+    \end{equation}
+    which is the ``hole picture''. 
+\end{enumerate}
+
+\subsection{Thermal Conductivity}
+Everyone is familiar with electrical conductivity measurements. Thermal conductivity is similar; we apply some thermal gradient to our material, and then measure the thermal current. There is some subtlety here; not only does heat flow, but charge also flows - we produce both $j^q$ (heat current) but also $j$ (electrical current). Thermal conductivity is defined as the ratio of the heat current to the thermal gradient, under the condition which no electrical current flows. 
+
+Heat current is also a bit subtle in its definition. It's not a pure energy current, one also has to consider entropy. We write down the two relations (from our course in thermodynamics) and draw analogies:
+\begin{equation}
+    \begin{split}
+        dQ = TdS &\leftrightarrow \v{j}^q = T \v{j}^s
+        \\ TdS = dU - \mu dN &\leftrightarrow T\v{j}^s = \v{j}^\e - \mu \v{j}^n
+    \end{split}
+\end{equation}
+so we suddenly have four currents to worry about. We do this because $\v{j}^\e, \v{j}^n$ are easy to calculate from our semi-classical theory, but it is $\v{j}^q$ that we want. So, next we will calculate $\v{j}^\e$ and $\v{j}^n$, and use these relations to reconstruct the electrical and heat current. We write:
+\begin{equation}
+    \m{\v{j}^\e \\ \v{j}^n} = \sum_n \int \frac{d^3j}{4\pi}\m{\e_n(\v{k}) \\ 1}\v{v}_n(\v{k})g_n(\v{k})
+\end{equation}
+The heat current is then:
+\begin{equation}
+    \v{j}^q = \v{j}^\e - \mu \v{j}^n = \sum_n \int \frac{d^3k}{4\pi^3}(\e_n(\v{k}) - \mu)v_n(\v{k})g_n(\v{k})
+\end{equation}
+Now what we do is we take the non-equilibrium distribution function with all the simplifying assumptions, and stick it in. Now we have both potentially a nonzero electric field and thermal gradient. Once again the contribution from the equilibrium piece will vanish. What we will get is the following:
+\begin{equation}
+    \begin{split}
+        \v{j} &= \hat{L}^{11}\e + \hat{L}^{12}(-\nabla T)
+        \\ \v{j}^q &= \hat{L}^{21}\e + \hat{L}^{22}(-\nabla T)
+    \end{split}
+\end{equation}
+where $\e = \v{E} + \frac{\nabla \mu}{e}$. Note we have the obvious diagonal pieces (electric field contributes to electrical current, thermal gradient contributes thermal gradient) but also off-diagonal; thermoelectric effects! E.g. $\hat{L}^{21}\e$ explains refrigerators, where we use electricity to remove heat. $\hat{L}^{12}(-\nabla T)$ explains space probes, which use heat from the sun to generate electricity. The theory we have developed allows us to calculate these coefficients, and if we summarize how this looks:
+\begin{equation}
+    \hat{L}^{11} = \mathcal{L}^{(0)}, \hat{L}^{22} = \frac{1}{e^2T}\mathcal{L}^{(2)}, \hat{L}^{21} = T\hat{L}^{12} = -\frac{1}{e}\mathcal{L}^{(1)}
+\end{equation}
+where:
+\begin{equation}
+    \begin{split}
+        \mathcal{L}^{(\alpha)} &= e^2 \int \frac{d^3k}{4\pi^3}\left(-\dpd{f}{\e}\right)\tau(\e(\v{k}))v_\mu(\v{k})v_\nu(\v{k})[\e(\v{k}) - \mu]^\alpha
+        \\ &= \int d\e \left(-\dpd{f}{\e}\right)(\e - \mu)^\alpha \hat{\Pi}(\e)
+        \\ &\text{where} \hat{\Pi}_{\mu\nu}(\e) = e^2\tau(\e)\int \frac{d^3k}{4\pi^3}\delta(\e - \e(\v{k}))v_\mu(\v{k})v_\nu(\v{k})
+    \end{split}
+\end{equation}
+so therefore:
+\begin{equation}
+    \begin{split}
+        \hat{L}^{11} &= \hat{\Pi}(\e_F) = \hat{\sigma}
+        \\ \hat{L}^{21} &= T\hat{L}^{12} = -\frac{\pi^2}{3e}(k_B T)^2 \hat{\Pi}'
+        \\ \hat{L}^{22} &= \frac{\pi^2}{3}\frac{k_B^2 T}{e^2}\hat{\sigma}
+    \end{split}
+\end{equation}
+where $\Pi' = \left(\dpd{\hat{\Pi}(\e)}{\e}\right)_{\e = \e_F}$. These formulas are valid at $k_B T \ll \e_F$ (Sommerfield expansion). The diagonal components are simple and relate to the electrical conductivity tensor. But there are off-diagonal effects which underlie the thermoelectric properties of materials.
+
+The last thing we will do is to extract the thermal conductivity - we want a situation where we apply a thermal gradient, and there is zero electrical current (only a thermal current). To this end, we must apply an electric field such that the electric field cancels out the thermoelectric term in $\v{j}$:
+\begin{equation}
+    \v{j} = 0 \implies \e = -(\hat{L}^{11})^{-1}\hat{L}^{12}(-\nabla T)
+\end{equation}
+This then gives:
+\begin{equation}
+    \v{j}^q = \hat{K}(-\nabla T)
+\end{equation}
+where:
+\begin{equation}
+    \hat{K} = \hat{L}^{22} - \hat{L}^{21}(\hat{L}^{11})^{-1}\hat{L}^{12}
+\end{equation}
+as expected, the dominant piece is $\hat{L}^{22}$, but there is a correction coming from the thermo-electric effects. One can show that the thermoelectric piece is on the order of $\left(\frac{k_B T}{\e_F}\right)^2$ which is small. So one finds that:
+\begin{equation}
+    \hat{K} \approx \hat{L}^{22} + O\left(\left(\frac{k_B T}{\e_F}\right)^2\right) \stackrel{T \to 0}{\longrightarrow} \hat{L}^{22}
+\end{equation}
+so recalling $\hat{L}^{22}$, we find at low $T$ in metals that:
+\begin{equation}
+    \hat{K} = \frac{\pi^2}{3}\left(\frac{k_B}{e}\right)^2 \hat{\sigma}
+\end{equation}
+which is known as the ``Wiedemann-Franz''\footnote{Unfortunately, no relation to Marcel as far as we know} law. It is reproduced in experiment. It is related to the fact that in some regimes, the heat is carried in electrons, which carry one unit of electric charge, and $k_B T$ of energy. In the assigned homework, we will see that this is \emph{not} true in a semiconductor - it is strongly violated. 
+
+This concludes the semiclassical theory of conduction in metals. We will now switch gears and discuss electron-phonon interactions ne
