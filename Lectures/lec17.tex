@@ -34,9 +34,9 @@ Looking at the creation/annihilation operators, we can see that an electron with
 
 \begin{figure}[htbp]
     \centering
-    
-    \caption{<caption>}
-    \label{<label>}
+    \includegraphics[scale=0.5]{Images/fig-elphfeynman.pdf}
+    \caption{Feynman Diagrams for the processes in $H_{e-p}$.}
+    \label{fig-elphfeynman}
 \end{figure}
 
 Also, look at $(\v{k}' - \v{k})\cdot \v{s}$; this means that only longitudinal phonons are important. In a generic solid, one cannot classify longitudinal/transverse phonons, but let us assume a sufficient amount of isotropy in the solid such that this is possible.
@@ -92,12 +92,19 @@ In 3-dimensions, note that $\delta \omega_\v{p}$ is finite everywhere but has an
 
 \begin{figure}[htbp]
     \centering
-    
-    \caption{<caption>}
-    \label{<label>}
+    \includegraphics[scale=0.6]{Images/fig-kohndispersion.pdf}
+    \caption{Dispersion Relation for 3-D electron-phonon interaction Hamiltonian. The derivative of the dispersion diverges at $p = 2k_F$.}
+    \label{fig-kohndispersion}
 \end{figure}
 
 What's the intuition behind this? Diagramatically, we have a electron-hole bubble:
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.8]{Images/fig-electronholebubble.pdf}
+    \caption{Feynman Diagram of Electron-Hole Bubble.}
+    \label{fig-electronholebubble}
+\end{figure}
 
 and why does this give us the intuition for the anomaly? Intuitively, the Kohn anomaly can be interpreted as phonon spending some fraction of time as a electron-hole pair. Because $v_F \gg v_{ph}$, the phonon speed of propagation increases dramatically. Why only near the fermi momentum? Kinetmatic constraints - you need the correct amount of momentum to create an electron-hole pair. At precisely $2k_F$, the fraction of time the phonon spends as an electron-hole pair approaches 100\%. Note a more careful analysis of the behaviour near $2k_F$ would show that the derivative of the dispersion does not actually diverge but approaches the fermi velocity, as we might expect.
 
@@ -110,9 +117,9 @@ but the integral vanishes everywhere where the product of $n_k, (1 - n_{k-q})$ i
 
 \begin{figure}[htbp]
     \centering
-    
-    \caption{<caption>}
-    \label{<label>}
+    \includegraphics[scale=0.6]{Images/fig-peirelssupport.pdf}
+    \caption{Sketch of the support of $n_k, 1 - n_{k-q}$.}
+    \label{fig-peirelssupport}
 \end{figure}
 
 so:
@@ -123,9 +130,9 @@ Although we assume $q > 0$, the same occurs for $q < 0$, as the above is symmetr
 
 \begin{figure}[htbp]
     \centering
-    
-    \caption{<caption>}
-    \label{<label>}
+    \includegraphics[scale=0.7]{Images/fig-peirelsdispersion.pdf}
+    \caption{Dispersion Relation for 1-D electron-phonon interaction Hamiltonian. Naive analysis has the dispersion (blue) diverging at $q = 2k_F$ but otherwise similar to the original dispersion (red), but a more careful analysis shows that the dispersion goes to zero at $2k_F$ instead (purple).}
+    \label{fig-peirelsdispersion}
 \end{figure}
 
 Note: A more careful treatement where we do not neglect $\hbar \omega_q$ in the denominator shows that $\omega_q \to 0$ as $q \to 2k_F$ (rather than diverging). This leads to ``Bose Condensation'' of phonons at $q = \pm 2k_F$ - there is always a macroscopic number of phonons at this frequency, as there is no energy cost to be at that frequency. Physically, what does this mean? This corresponds to a static distortion of the lattice (we see a spontaneous change in the geometry), known as the \emph{Peierls instability}. Next time we look at the canonical example of this, which is polyacetate - it undergoes a dimerization transition which can be observed as this instability.
