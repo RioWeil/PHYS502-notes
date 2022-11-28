@@ -1,1 +1,98 @@
 \section{Semiclassical Theory of Conduction II}
+We have our configurational space $\v{k}, \v{r}$. For some volume in this space, as we go infinitesimal we have:
+\begin{equation}
+    g_n(\v{k}, \v{r}, t) \frac{d\v{k}d\v{r}}{4\pi^3} = dN
+\end{equation}
+where $g_n$ is the density of states. In equilibrium, we have that:
+\begin{equation}
+    g_n \to g_0 = \frac{1}{e^{\beta(\e_\v{k} - \mu)} + 1}.
+\end{equation}
+
+If we recall the Drude model, there we looked at a toy model of electrons travelling through a wire, with equation of motion:
+\begin{equation}
+    \dod{\v{p}}{t} = \v{F} - \frac{\v{p}}{\tau}
+\end{equation}
+where the probability of a collision in an infinitesimal time interval $dt$ given by $dp = \frac{dt}{\tau}$ with $\tau$ the relaxation time and $\int dp = 1$. 
+
+\subsection{Non-equilibrium Distribution Function}
+ With this picture in mind, we have that the number of electrons emerging from each collision after time $dt$ is:
+\begin{equation}
+    dg_n = \frac{dt}{\tau(\v{k}, \v{r})}g_0(\v{k}, \v{r}, t)\frac{d^3kd^3r}{4\pi^3}
+\end{equation}
+where the $g_0(\v{k}, \v{r}, t)\frac{d^3kd^3r}{4\pi^3}$ are the number of electrons that appear in the volume.
+
+Now, let us assume that $g_0(\v{k}, \v{r}, t)$ is unaltered by collisions, that $g_0$ does not depend on $g$ (and as above, $g \to g_0$ in equilibrium). The trajectory of an electron is described by $\v{r}(t), \v{k}(t)$. 
+
+Define $P(t, t')$ as the number of electrons that make it to $\v{k}(t), \v{r}(t)$ without a collision from $\v{k}(t'), \v{r}(t')$. Note that some electrons will leave this trajectory due to collisions.
+
+We then have that:
+\begin{equation}
+    dN = g(\v{k}, \v{r}, t)\frac{d^3kd^3r}{4\pi^3}= \int_{-\infty}^t P(t, t')\frac{dt'}{\tau(\v{k}(t'), \v{r}(t'))}g_0(\v{k}(t'), \v{r}(t'), t)\frac{d^3kd^4r}{4\pi^3}
+\end{equation}
+
+It is worth noting some terminology now - $g$ is the non-equilibrium distribution function, while $g_0$ is the equilibrium distribution function.
+
+Now, we have:
+\begin{equation}
+    P(t, t') = P(t, t' + dt')\left(1 - \frac{dt'}{\tau(t')}\right)
+\end{equation}
+so in the limit where $dt' \to 0$:
+\begin{equation}
+    \dpd{P(t, t')}{t'} = \frac{P(t, t')}{\tau(t')}
+\end{equation}
+which has solution:
+\begin{equation}
+    P(t, t') = e^{-\int_{t'}^t \frac{dt''}{\tau(t'')}}
+\end{equation}
+and we note that $P(t, t) = 1$ (of course, as there are no collisions).
+
+Using this, we can write the non-equilibrium distribution function as:
+\begin{equation}
+    \begin{split}
+        g(t) &= \int_{-\infty}^t dt' g_0(t')\frac{P(t, t')}{\tau(t')}
+        \\ &= \int_{-\infty}^t dt' g_0(t')\dpd{P(t, t')}{t'}
+        \\ &= \left.g_0(t')P(t, t')\right|_{-\infty}^t - \int_{-\infty}^t P(t, t') \dpd{}{t'}g_0(t') \quad \text{(Integration by parts)}
+        \\ &= g_0(t)P(t, t) - g_{0}(-\infty)P(t, -\infty) - \int_{-\infty}^t P(t, t')\dpd{g_0(t')}{t'}
+    \end{split}
+\end{equation}
+Now noting that $P(t, t) = 1$ and $P(t, -\infty) = 0$ (as no electrons from $-\infty$ make it to $t$):
+\begin{equation}
+    g(t) = g_0(t) - \int_{-\infty}^t dt' P(t, t')\dod{g_0(t')}{t}
+\end{equation}
+Now, with $g_0(\v{k}, \v{r}) = \frac{1}{e^{\beta(\e_\v{k} - \mu)} + 1}$, and so $g_0(\v{k}(t), \v{r}(t)) = \frac{1}{e^{\beta(\v{r}(t))\left(\e(\v{k}(t)) - \mu(\v{r}(t))\right)} + 1}$ (where this corresponds to ``local'' occupation assuming ``local thermodynamic equilibrium''), we compute with the chain rule that:
+\begin{equation}
+    \dod{g_0}{t} = \dpd{g_0}{\e_\v{k}}\dpd{\e_{\v{k}}}{\v{k}}\dod{\v{k}}{t} + \dpd{g_0}{\mu}\dpd{\mu}{\v{r}}\dod{\v{r}}{t} + \dpd{g_0}{T}\dpd{T}{\v{r}}\dod{\v{r}}{t}
+\end{equation}
+Now, recalling that:
+\begin{equation}
+    \begin{split}
+        \dod{\v{r}}{t} &= \v{v}_n(\v{k}) = \frac{1}{\hbar}\nabla_\v{k}\e_\v{k}
+        \\ \hbar\dod{\v{k}}{t} = -e(\v{E} + \frac{\v{v}}{c} \times \v{H})
+    \end{split}
+\end{equation}
+we find:
+\begin{equation}
+    \dpd{g_0}{\e_\v{k}}\dpd{\e_{\v{k}}}{\v{k}}\dod{\v{k}}{t} = \dpd{f}{\e}\v{v} \cdot e(\v{E} + \frac{\v{v}}{c} \times \v{H}) = \dpd{f}{\e}\v{v} \cdot e\v{E}
+\end{equation}
+where the second term vanishes as $\v{v} \times \v{H}$ is perpendicular to $\v{v}$. For the other terms:
+\begin{equation}
+    \dpd{g_0}{\mu}\dpd{\mu}{\v{r}}\dod{\v{r}}{t} = -\dpd{f}{\e}\nabla \mu \cdot \v{v}
+\end{equation}
+\begin{equation}
+    \dpd{g_0}{T}\dpd{T}{\v{r}}\dod{\v{r}}{t} = -\dpd{f}{\e}\left(\frac{\e - \mu}{T}\right)\nabla T \cdot \v{v}
+\end{equation}
+So therefore the non-equilibrium distribution function can be written as:
+\begin{equation}
+    g(t) = g_0(t) + \int_{-\infty}^t dt'P(t, t')\left[-\dpd{f}{\e}\v{v} \cdot \left(-e\v{E} - \nabla \mu - \frac{\e - \mu}{T} \nabla T\right)\right]
+\end{equation}
+where $P(t, t') = e^{-(t-t')/\tau(\e_\v{k})}$ assuming $\tau = \tau(\e_\v{k})$. 
+
+Note that last lecture we wrote down a current as:
+\begin{equation}
+    \v{j} = -e\int_{\e < \e_F} \frac{dk}{4\pi^3}\v{v}(\v{k})
+\end{equation}
+with the equilibrium distribution (Fermi-Dirac distribution) we now generalize this to:
+\begin{equation}
+    \v{j} = -e\int \frac{d^3k}{4\pi^3}\v{v}(\v{k}) \cdot g(\v{k})
+\end{equation}
+where $g(\v{k})$ corresponds to some other, messier distribution.
