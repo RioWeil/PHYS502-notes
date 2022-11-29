@@ -64,7 +64,7 @@ Now, let's use second-order perturbation theory to calculate the perturbed energ
 $E_1^{(0)} = \e_1$ is just the unperturbed energy. $\bra{\phi_1}H'\ket{\phi_1} = 0$ as there is an odd number of phonon operators in $H'$. Now, for the second order term - this might seem unfamiliar compared to what you are used to. If you insert the completeness relation $\II = \sum_i \dyad{\phi_i}{\phi_i}$ twice (next to the $H'$s) you will reproduce the usual expression. Importantly, it is only at second order where one finds interesting physics.
 
 So, let's calculate this second order term:
-\begin{equation}
+\begin{equation}\label{eq-secondordercorrectionelph}
     E_1^{(2)} = \bra{\phi_1}\sum_{\v{k}, \v{q}} M_{\v{q}}(a^\dag_{-\v{q}} + a_{\v{q}})c^\dag_{\v{k} + \v{q}}c_{\v{k}}(\e_1 - H_0)^{-1}\sum_{\v{k}', \v{q}'} M_{\v{q}'}(a^\dag_{-\v{q}'} + a_{\v{q}'})c^\dag_{\v{k}' + \v{q}'}c_{\v{k}'}\ket{\phi_1}
 \end{equation}
 we make our lives simpler by the following observation - if we anninilate a phonon then we must create another, or if we create a phonon we must annihilate another. So, there are two possible pairings which give a nonzero contribution, namely $a^\dag_{-\v{q}}a_{\v{q}'}$ and $a_\v{q}a^\dag_{-\v{q}'}$.
@@ -126,6 +126,10 @@ so:
 \begin{equation}
     \hbar \delta \omega_P =  -\int_{-k_F}^{-k_F + q}dk \frac{1}{(k - q)^2 - k^2} = \left.\frac{1}{2q}\ln\abs{q - 2k}\right|_{-k_F}^{q - k_F} = \frac{1}{2q}\left(\ln\abs{q - 2k_F} - \ln\abs{q + 2k_F}\right)
 \end{equation}
+and so we conclude:
+\begin{equation}
+    \delta \omega_\v{q} \sim \frac{1}{2q}\left(\ln\abs{q - 2k_F} - \ln\abs{q + 2k_F}\right)
+\end{equation}
 Although we assume $q > 0$, the same occurs for $q < 0$, as the above is symmetric in the sign of $q$. But now notice - this correction is divergent when $q = \pm 2k_F$! This is a much stronger effect - in 3D the correction was finite but the derivative diverged, but here the correction itself diverges.
 
 \begin{figure}[htbp]
@@ -136,3 +140,108 @@ Although we assume $q > 0$, the same occurs for $q < 0$, as the above is symmetr
 \end{figure}
 
 Note: A more careful treatement where we do not neglect $\hbar \omega_q$ in the denominator shows that $\omega_q \to 0$ as $q \to 2k_F$ (rather than diverging). This leads to ``Bose Condensation'' of phonons at $q = \pm 2k_F$ - there is always a macroscopic number of phonons at this frequency, as there is no energy cost to be at that frequency. Physically, what does this mean? This corresponds to a static distortion of the lattice (we see a spontaneous change in the geometry), known as the \emph{Peierls instability}. Next time we look at the canonical example of this, which is polyacetate - it undergoes a dimerization transition which can be observed as this instability.
+
+\subsection{Polyacetylene - A Classic Peierls Example}
+Last time we saw the effect of electron-phonon interactions in 1D, resulting in Peierls instability. The canonical example of this phenomenon is in polyacetylene, which is a carbon polymer with 2 hydrogens per site. 
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.4]{Images/fig-polyacetylene.pdf}
+    \caption{Symbolic depiction of the polyacetylene molecule.}
+    \label{fig-polyacetylene}
+\end{figure}
+Each carbon atom contributes one electron, so the simple prediction from a tight-binding model gives the dispersion:
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.6]{Images/fig-polyacetightbinddispersion.pdf}
+    \caption{Dispersion relation for the polyacetylene molecule as predicted by the tight-binding molecule. This suggests the molecule is a conductor, but in fact it is insulating.}
+    \label{fig-polyacetightbinddispersion}
+\end{figure}
+which seems to suggest that the molecule should be a conductor! But when one prepares these molecules experimentally, we find that these molecules are insulating. We can understand this by studying the effects of electron-phonon interaction. Here we have $k_f = \frac{\pi}{2a}$ and so $2k_F = \frac{\pi}{a}$, i.e. at the edge of the Bruillion zone we see $\omega_q$ goes to zero.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.6]{Images/fig-polyacepeierls.pdf}
+    \caption{The electron-phonon interactions lead to the phonon dispersion going to zero at the edge of the Bruillion zone.}
+    \label{fig-polyacepeierls}
+\end{figure}
+
+\newpage 
+Now, since $\mu_q(\v{r}) \sim e^{irq} = r^{ila\frac{\pi}{a}} = e^{il\pi} = \pm 1$, we will find that the Peierls instability results in a static distortion where odd sites get shifted to the left and even sites get shifted to the right - which results in a dimerized chain, with the bond lengths alternating:
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.5]{Images/fig-polyacedimerization.pdf}
+    \caption{The phonon-electron interactions lead to a static deformation of the 1-D chain, leading to dimerization.}
+    \label{fig-polyacedimerization}
+\end{figure}
+
+This is ``dimerized polyacetylene''. Computing the band structure for this, we find:
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.6]{Images/fig-polyacedimersizeddispersion.pdf}
+    \caption{Dispersion relation for the dimerized polyacetylene chain.}
+    \label{fig-polyacedimersizeddispersion}
+\end{figure}
+
+where we have an insulator (the lower band is totally filled, and the upper band totally empty) and we have a ``dimerization gap''.
+
+\subsection{Polarons and Mass Enhancement}
+Now, we ask how electron-phonon coupling affects the electron band structure. We saw an extreme example of this above in 1-D, but let us see how the (weaker) effect manifests in 3-D. This can also be understood based on the Frolich Hamiltonian which we derived last time, and follows from the second term in Eq. \eqref{eq-secondordercorrectionelph}.
+
+The contraction of this term yields:
+\begin{equation}\label{eq-eleselfenergy}
+    E_0^{(2)} = -\sum_{\v{k}, \v{q}}\abs{M_{\v{q}}}^2 \frac{\bra{\phi_0}a_\v{q}c^\dag_{\v{k}}c_{\v{k} - \v{q}}a^\dag_{\v{q}}c^\dag_{\v{k} - \v{q}}c_{\v{k}}\ket{\phi_0}}{\e_\v{k} - \e_{\v{k} - \v{q}} - \hbar \omega_\v{q}}
+\end{equation}
+Diagramatically, the above process can be visualized as:
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.5]{Images/fig-polaronfeynman.pdf}
+    \caption{Feynman diagram for the process depicted in Eq. \eqref{eq-eleselfenergy}.}
+    \label{fig-polaronfeynman}
+\end{figure}
+
+Note that Eq. \eqref{eq-eleselfenergy} is called the electron ``self-energy'' due to phonons\footnote{There is an anlogous process in quantum electrodynamics, with an electron emitting a photon and absorbing it back.}. We calculate this expression exactly as we did before, and obtain:
+\begin{equation}
+    E_0^{(2)} = \sum_{\v{k}, \v{q}}\abs{M_\v{q}}^2 \frac{n_\v{k}(1 - n_{\v{k} - \v{q}})}{\e_{\v{k}} - \e_{\v{k} - \v{q}} - \hbar \omega_{\v{q}}}
+\end{equation}
+How do we analyze this expression? The effective single electron Hamiltonian reads:
+\begin{equation}
+    H_e = \sum_{\v{k}}(\e_{\v{k}} + \delta \e_{\v{k}})c^\dag_{\v{k}}c_{\v{k}} = \sum_{\v{k}}(\e_{\v{k}} + \delta \e_{\v{k}})n_{\v{k}}
+\end{equation}
+Now, its clear that the correction $\delta \e_{\v{k}}$ can be obtained by taking the derivative of the correction w.r.t $n_{\v{k}}$:
+\begin{equation}
+    \begin{split}
+        \delta \e_{\v{k}} = \dpd{E_{0}^{(2)}}{n_{\v{k}}} &= \sum_{\v{q}}\abs{M_{\v{q}}}^2 \left(\frac{1 - n_{\v{k} - \v{q}}}{\e_{\v{k}} - \e_{\v{k} - \v{q}} - \hbar \omega_{\v{q}}} - \frac{n_{\v{k} + \v{q}}}{\e_{\v{k} + \v{q}} - \e_{\v{k}} - \hbar \omega_{\v{q}}}\right)
+        \\ &= \sum_{\v{q}}\abs{M_{\v{q}}}^2 \left(\frac{1}{\e_{\v{k}} - \e_{\v{k} - \v{q}} - \hbar \omega_{\v{q}}} - \frac{2\hbar \omega_{\v{q}}n_{\v{k} - \v{q}}}{(\e_{\v{k}} - \e_{\v{k} - \v{q}})^2 - (\hbar \omega_{\v{q}})^2}\right)
+    \end{split}
+\end{equation}
+Note that the second term comes about because the fixed $\v{k}$ we take the derivative with respect to coincides with the $\v{k}$ in the sum. 
+
+The first term represents a correction independent of $n_{\v{k}}$, and would be present even in an insulating crystal. It changes the effective mass of the electron near $\v{k} = \v{0}$. We say that the electron is ``dressed'' with a cloud of phonons and becomes the so called ``polaron''. In some crystals, this enhancement can be very large - factor of 10, for example (corresponds to a large number of phonons attached to the electrons).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.5]{Images/fig-enhancedmassparabola.pdf}
+    \caption{Sketch of the dispersion relation for the electrons - the phonons dress the electrons, enhancing their mass and changing the curvature of the dispersion as a result.}
+    \label{fig-enhancedmassparabola}
+\end{figure}
+
+The second term leads to a velocity change near the Fermi level:
+\begin{equation}
+    \hbar v_{\v{k}} = \dpd{(\e_{\v{k}} + \delta \e_{\v{k}})}{\v{k}} = \dpd{\e_{\v{k}}}{\v{k}}\left(1 + \dod{}{\e_{\v{k}}}\sum_{\v{q}}\abs{M_\v{q}}^2 \frac{2\hbar \omega_{\v{q}}n_{\v{k} - \v{q}}}{(\e_{\v{k}} - \e_{\v{k} - \v{q}})^2 - (\hbar \omega_{\v{q}})^2} \right) \approx \hbar \v{v}_k^0(1-\alpha)
+\end{equation}
+with $\alpha > 0$. The final approximation we make by expanding around $k_F$. Again we have a ``mass enhancement'' as we have a lower velocity. Diagramatically, we can interpret this as the electron spends time as a slower electron + phonon before recombining, hence travels at a reduced speed. The dispersion looks like:
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.6]{Images/fig-enhancedmassdispersion.pdf}
+    \caption{Dispersion relation for the mass-enhanced electrons. At $k_F$ there is a small effect from the phonons, slowing them down and leading to a wiggle in the dispersion there.}
+    \label{fig-enhancedmassdispersion}
+\end{figure}
+
+where we see near the Fermi surface that the velocity is reduced, attributed to the electron being slowed down by the phonon cloud.
+
+Higher order terms have multiple phonons splitting off from the electron and recombining - but these much look much more complicated.
