@@ -49,8 +49,8 @@ Now, the trick is to act $H_0$ on the right and $H_0$ on the left, yielding the 
     (\e_n - \e_m)\bra{\phi_n}S\ket{\phi_m} = -\lambda \bra{\phi_n}H'\ket{\phi_m}
 \end{align*}
 So dividing by the energies, we can obtain arbitrary matrix elements of $S$ (note: it might seem like we run into trouble with this if we look at diagonal matrix elements - however we get around this by absorbing any diagonal perturbations into $H_0$, so the diagonal terms of $H'$ are zero)! I.e. we have the solution:
-\begin{equation}
-    \bra{\phi_n}S\ket{\phi_m} = \lambda\frac{\bra{\phi_n}S\ket{\phi_m}}{\e_m - \e_n}
+\begin{equation}\label{eq-Smatrixelements}
+    \bra{\phi_n}S\ket{\phi_m} = \lambda\frac{\bra{\phi_n}H\ket{\phi_m}}{\e_m - \e_n}
 \end{equation}
 Finally, we have:
 \begin{align*}
@@ -61,3 +61,53 @@ By assumption $[H_0, S] = -\lambda H'$, so $\lambda[H', S] + \frac{1}{2}[[H_0, S
     \tilde{H} = H_0 + \frac{1}{2}\lambda [H',S] + O(\lambda^3).
 \end{equation}
 which achieves what we set out to do - we have found $S$ such that the transformed Hamiltonian is to leading order independent of $\lambda$! Next class, we apply this technique to the Frolich Hamiltonian. And when we evalute the $[H', S]$ term, we will see that it has no phonons, and corresponds to an attractive interaction.
+
+\subsection{Applying Canonical Transformations to the Frolich Hamiltonian}
+We consider $T = 0$, i.e. there are no thermal phonons.
+
+As basis states, we take eigenstates of the phonon Hamiltonian $H^{\phi}_0 = \sum_{\v{q}} \omega_{\v{q}} a^\dag_{\v{q}} a_{\v{q}}$. Only two eigenstates here will be of consequence, namely $\ket{0}$ (no phonons) and $\ket{\v{q}}$ (one phonon of momenta $\v{q}$) - note that higher phonon states do not contribute as starting from the ground state we are not able to excite to a state with more than one phonon. We use \eqref{eq-Smatrixelements} to calculate:
+\begin{equation}
+    \begin{split}
+        \bra{\v{q}}S\ket{0} = M\sum_{\v{k}, \v{p}} \frac{\bra{\v{q}}c^\dag_{\v{k} + \v{p}}c_{\v{k}}(a^\dag_{-\v{p}} + a_{\v{p}})\ket{0}}{\e_{\v{k}} - \e_{\v{k} + \v{p}} - \omega_{\v{q}}} = M\sum_{\v{k}} \frac{c^\dag_{\v{k} - \v{q}}c_{\v{k}}}{\e_{\v{k}} - \e_{\v{k} - \v{q}} - \omega_{\v{q}}}
+    \end{split}
+\end{equation}
+where in the last equality we use that the matrix element vanishes unless $\v{p} = -\v{q}$. Analogously, we can obtain:
+\begin{equation}
+    \bra{0}S\ket{\v{q}} = M^* \sum_{\v{k}}\frac{c^\dag_{\v{k} + \v{q}}c_{\v{k}}}{\e_{\v{k}} - \e_{\v{k} + \v{q}} + \omega_{\v{q}}}
+\end{equation}
+So we can therefore find the leading $\sim \lambda^2$ correction in $\tilde{H}$:
+\begin{equation}
+    \begin{split}
+        \bra{0}[H', S]\ket{0} &= \bra{0}H'S\ket{0} - \bra{0}SH'\ket{0}
+        \\ &= \sum_{\v{q}}\left(\bra{0}H'\ket{\v{q}}\bra{\v{q}}S\ket{0} - \bra{0}S\ket{\v{q}}\bra{\v{q}}H'\ket{0}\right)
+        \\ &= \abs{M}^2\sum_{\v{q}, \v{k}, \v{k}'}c^\dag_{\v{k}' + \v{q}}c_{\v{k'}}c^\dag_{\v{k} - \v{q}}c_{\v{k}}\left(\frac{1}{\e_{\v{k}} - \e_{\v{k} - \v{q}} - \omega_{\v{q}}} - \frac{1}{\e_{\v{k}'} - \e_{\v{k}' + \v{q}} + \omega_{\v{q}}}\right) TODO FIX
+    \end{split}
+\end{equation}
+where in the second equality we have inserted the resolution of the identity, and in the third equality we evalute the matrix elements. We have ``integrated out the phonons'' in this way. Now, in the last term let us rename $\v{k} \leftrightarrow \v{k}'$, reverse $\v{q} \to -\v{q}$ and so:
+\begin{equation}
+    \bra{0}[H', S]\ket{0} = \abs{M}^2 \sum_{\v{q}, \v{k}, \v{k}'} \frac{\omega_{\v{q}}}{(\e_{\v{k}} - \e_{\v{k} - \v{q}})^2 - \omega_{\v{q}}^2}c^\dag_{\v{k}' + \v{q}}c_{\v{k}'}c^\dag_{\v{k} - \v{q}}c_{\v{k}}
+\end{equation}
+which (looking at the first term) can be negative! So, we conclude that the phonon-mediated interaction is attractive whenever this occurs, i.e.:
+\begin{equation}
+    \abs{\e_{\v{k}} - \e_{\v{k} - \v{q}}} < \omega_{\v{q}} \implies \frac{\hbar^2}{2m}\abs{2\v{k} \cdot \v{q} - \v{q}^2} < c_s\abs{\v{q}}
+\end{equation}
+where in the last implication we put in the dispersion relation for free electrons $\e_\v{k} = \frac{\hbar^2\v{k}^2}{2m}$, and the dispersion relation for acoustic phonons (linear). This occurs whenever $\abs{\v{k}} \approx k_F$ and $\v{q} \approx 2\v{k}$. 
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.7]{Images/fig-attractingelectrons.pdf}
+    \caption{Electrons at different poles of the Fermi sphere feel an attractive interaction, due to phonons.}
+    \label{fig-attractingelectrons}
+\end{figure}
+
+I.e. whenever two electrons are on opposite sides of the Fermi surface, their interaction will be attractive. And this we will see leads to superconductivity!
+
+\subsection{A physical picture for attractive electrons}
+We consider an ionic lattice. The electrons exert an attractive force on the ions in the lattice. But the electron moves very quickly. Another electron then would see the increased positive charge density due to the ions - the second electron then feels attraction to this increased positive charge density. The important thing in the language that we use is that this is a retarded attraction - which is to say that the second electron is attracted to the previous position of the first electron. This is good, because when the second electron feels the attraction, the first electron is already faraway - so the Coloumb interaction does not matter in this consideration. So, even though this phonon mediated attraction is fairly weak compared to Coloumb, it can often win out - and this is all because of the relative velocities of the players in the interaction.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.8]{Images/fig-electronattractionsketch.pdf}
+    \caption{Cartoon sketch of the electron-electron attraction mechanism. Electron 1 attracts the positively charged ions in the lattice, and then quickly moves elsewhere in the lattice, creating an area of high positive charge density. Electron 2 is then attracted to the area that electron 1 once was.}
+    \label{fig-electronattractionsketch}
+\end{figure}

@@ -142,7 +142,7 @@ Although we assume $q > 0$, the same occurs for $q < 0$, as the above is symmetr
 Note: A more careful treatement where we do not neglect $\hbar \omega_q$ in the denominator shows that $\omega_q \to 0$ as $q \to 2k_F$ (rather than diverging). This leads to ``Bose Condensation'' of phonons at $q = \pm 2k_F$ - there is always a macroscopic number of phonons at this frequency, as there is no energy cost to be at that frequency. Physically, what does this mean? This corresponds to a static distortion of the lattice (we see a spontaneous change in the geometry), known as the \emph{Peierls instability}. Next time we look at the canonical example of this, which is polyacetate - it undergoes a dimerization transition which can be observed as this instability.
 
 \subsection{Polyacetylene - A Classic Peierls Example}
-Last time we saw the effect of electron-phonon interactions in 1D, resulting in Peierls instability. The canonical example of this phenomenon is in polyacetylene, which is a carbon polymer with 2 hydrogens per site. 
+Last time we saw the effect of electron-phonon interactions in 1D, resulting in Peierls instability. The canonical example of this phenomenon is in polyacetylene, which is a carbon polymer with 1 hydrogen atom per site.
 
 \begin{figure}[htbp]
     \centering
@@ -150,7 +150,11 @@ Last time we saw the effect of electron-phonon interactions in 1D, resulting in 
     \caption{Symbolic depiction of the polyacetylene molecule.}
     \label{fig-polyacetylene}
 \end{figure}
-Each carbon atom contributes one electron, so the simple prediction from a tight-binding model gives the dispersion:
+
+\textcolor{blue}{TODO: Fix figure}
+Explaining the chemistry: there are 4 valence electrons, 3 are hybridized ($s, p_x, p_y$) and form bonds and do not contribute to conduction. One is in the $p_z$ orbital (which sticks out of the plane) and this is the one electron that contributes to the conduction band.
+
+So, we have the contribution of one electron per carbon atom, and therefore a simple prediction from a tight-binding model gives the dispersion:
 \begin{figure}[htbp]
     \centering
     \includegraphics[scale=0.6]{Images/fig-polyacetightbinddispersion.pdf}
@@ -171,7 +175,7 @@ Now, since $\mu_q(\v{r}) \sim e^{irq} = r^{ila\frac{\pi}{a}} = e^{il\pi} = \pm 1
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[scale=0.5]{Images/fig-polyacedimerization.pdf}
+    \includegraphics[scale=0.7]{Images/fig-polyacedimerization.pdf}
     \caption{The phonon-electron interactions lead to a static deformation of the 1-D chain, leading to dimerization.}
     \label{fig-polyacedimerization}
 \end{figure}
