@@ -1,2 +1,2 @@
 # PHYS502-notes
-Typeset notes for UBC's PHYS 502 (Condensed Matter Physics I) course.
+Typeset notes for UBC's PHYS 502 (Graduate Condensed Matter Physics I) course.
